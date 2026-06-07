@@ -1,0 +1,203 @@
+{ inputs, ... }: {
+  perSystem = { pkgs, lib, self', ... }: {
+    packages.myNiri = inputs.wrapper-modules.wrappers.niri.wrap {
+      inherit pkgs;
+      settings = {
+        input = {
+          keyboard.xkb = {
+            layout = "gb";
+            options = "numpad:mac";
+          };
+          touchpad = {
+            tap = {};
+            natural-scroll = {};
+          };
+          mouse = {};
+          trackpoint = {};
+        };
+
+        outputs."eDP-1" = {
+          mode = "1920x1080@120.030";
+          scale = 1.0;
+          transform = "normal";
+        };
+
+        layout = {
+          gaps = 10;
+          center-focused-column = "never";
+          default-column-width.proportion = 1.0;
+          focus-ring = {
+            width = 2;
+            active-color = "#bd93f9";
+            inactive-color = "#44475a";
+          };
+          border.off = {};
+          preset-column-widths = [
+            { proportion = 0.5; }
+            { proportion = 1.0; }
+          ];
+        };
+
+        animations.slowdown = 1.0;
+
+        workspaces = {
+          "1" = {};
+          "2" = {};
+          "3" = {};
+          "4" = {};
+          "5" = {};
+          "6" = {};
+          "7" = {};
+          "8" = {};
+          "9" = {};
+        };
+
+        window-rules = [
+          {
+            geometry-corner-radius = 8;
+            clip-to-geometry = true;
+          }
+          {
+            matches = [{ app-id = "zen$"; title = "^Picture-in-Picture$"; }];
+            open-floating = true;
+          }
+          {
+            matches = [{ title = "^Picture-in-Picture$"; }];
+            open-floating = true;
+          }
+          {
+            matches = [{ app-id = "^pavucontrol$"; }];
+            open-floating = true;
+          }
+          {
+            matches = [{ app-id = "^nm-connection-editor$"; }];
+            open-floating = true;
+          }
+          {
+            matches = [{ app-id = "^foot$"; }];
+            default-column-width.proportion = 0.5;
+          }
+          {
+            matches = [{ app-id = "^thunar$"; }];
+            default-column-width.proportion = 0.5;
+          }
+        ];
+
+        screenshot-path = "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
+
+        spawn-at-startup = [
+          [ (lib.getExe pkgs.xwayland-satellite) ]
+          [ (lib.getExe self'.packages.myNoctalia) ]
+          [ (lib.getExe pkgs.fcitx5) "-d" ]
+          [ (lib.getExe pkgs.dunst) ]
+          [ (lib.getExe pkgs.bash) "-lc" "sleep 1 && ${lib.getExe pkgs.networkmanagerapplet} --indicator" ]
+          [ (lib.getExe pkgs.bash) "-lc" "${lib.getExe pkgs.swaybg} -i ~/Pictures/matikanefuku.png" ]
+        ];
+
+        prefer-no-csd = true;
+
+        environment = {
+          XDG_SESSION_TYPE = "wayland";
+          XDG_CURRENT_DESKTOP = "niri";
+          XDG_SESSION_DESKTOP = "niri";
+          DISPLAY = ":1";
+          GDK_BACKEND = "wayland";
+          GTK_USE_PORTAL = "1";
+          QT_QPA_PLATFORM = "wayland";
+          QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+          QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+          ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+          MOZ_ENABLE_WAYLAND = "1";
+          SDL_VIDEODRIVER = "wayland";
+          CLUTTER_BACKEND = "wayland";
+          _JAVA_AWT_WM_NONREPARENTING = "1";
+          XDG_DESKTOP_PORTAL = "xdg-desktop-portal";
+          XCURSOR_THEME = "catppuccin-mocha-mauve-cursors";
+          XCURSOR_SIZE = "24";
+          WLR_NO_HARDWARE_CURSORS = "1";
+        };
+
+        binds = {
+          "Alt+Shift+Slash".show-hotkey-overlay = {};
+
+          "Alt+Return".spawn-sh = lib.getExe pkgs.foot;
+          "Alt+B".spawn-sh = lib.getExe pkgs.qutebrowser;
+          "Alt+Shift+B".spawn-sh = lib.getExe pkgs.firefox;
+          "Alt+T".spawn-sh = "${lib.getExe pkgs.foot} -e yazi";
+          "Alt+Shift+T".spawn-sh = lib.getExe pkgs.thunar;
+          "Alt+S".spawn-sh = lib.getExe pkgs.steam;
+          "Alt+D".spawn-sh = lib.getExe pkgs.fuzzel;
+          "Alt+V".spawn-sh = lib.getExe pkgs.vesktop;
+          "Alt+E".spawn-sh = "${lib.getExe pkgs.foot} -e nvim";
+          "Alt+Shift+E".spawn-sh = lib.getExe pkgs.vscodium;
+          "Alt+Y".spawn-sh = lib.getExe pkgs.waypaper;
+
+          "Alt+Escape".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call sessionMenu toggle";
+
+          "Ctrl+Alt+Q".close-window = {};
+
+          "Alt+J".focus-column-left = {};
+          "Alt+L".focus-column-right = {};
+          "Alt+I".focus-window-up = {};
+          "Alt+K".focus-window-down = {};
+
+          "Alt+Shift+J".move-column-left = {};
+          "Alt+Shift+L".move-column-right = {};
+          "Alt+Shift+I".move-window-up = {};
+          "Alt+Shift+K".move-window-down = {};
+
+          "Alt+1".focus-workspace = "1";
+          "Alt+2".focus-workspace = "2";
+          "Alt+3".focus-workspace = "3";
+          "Alt+4".focus-workspace = "4";
+          "Alt+5".focus-workspace = "5";
+          "Alt+6".focus-workspace = "6";
+          "Alt+7".focus-workspace = "7";
+          "Alt+8".focus-workspace = "8";
+          "Alt+9".focus-workspace = "9";
+          "Alt+M".focus-workspace-down = {};
+          "Alt+N".focus-workspace-up = {};
+
+          "Alt+Shift+1".move-column-to-workspace = "1";
+          "Alt+Shift+2".move-column-to-workspace = "2";
+          "Alt+Shift+3".move-column-to-workspace = "3";
+          "Alt+Shift+4".move-column-to-workspace = "4";
+          "Alt+Shift+5".move-column-to-workspace = "5";
+          "Alt+Shift+6".move-column-to-workspace = "6";
+          "Alt+Shift+7".move-column-to-workspace = "7";
+          "Alt+Shift+8".move-column-to-workspace = "8";
+          "Alt+Shift+9".move-column-to-workspace = "9";
+          "Alt+Shift+M".move-column-to-workspace-down = {};
+          "Alt+Shift+N".move-column-to-workspace-up = {};
+
+          "Alt+Minus".set-column-width = "-10%";
+          "Alt+Equal".set-column-width = "+10%";
+          "Alt+Shift+Minus".set-window-height = "-10%";
+          "Alt+Shift+Equal".set-window-height = "+10%";
+          "Alt+Comma".consume-window-into-column = {};
+          "Alt+Period".expel-window-from-column = {};
+          "Alt+BracketLeft".consume-or-expel-window-left = {};
+          "Alt+BracketRight".consume-or-expel-window-right = {};
+
+          "Alt+Tab".toggle-window-floating = {};
+          "Alt+W".switch-preset-column-width = {};
+          "Alt+F".fullscreen-window = {};
+
+          "Alt+Shift+Backspace".quit = {};
+          "Mod+Shift+L".spawn-sh = "${lib.getExe pkgs.gtklock} -s /home/yari/.config/gtklock/style.css -b /home/yari/Pictures/matikanefuku.png";
+          "Alt+Ctrl+P".spawn-sh = "${lib.getExe pkgs.doas} reboot";
+          "Alt+Shift+P".spawn-sh = "${lib.getExe pkgs.doas} poweroff";
+
+          "XF86AudioRaiseVolume".spawn-sh = "${lib.getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 0.1+";
+          "XF86AudioLowerVolume".spawn-sh = "${lib.getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 0.1-";
+          "XF86AudioMute".spawn-sh        = "${lib.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SINK@ toggle";
+          "XF86AudioMicMute".spawn-sh     = "${lib.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+
+          "Alt+X".screenshot = {};
+          "Alt+Shift+X".screenshot-screen = {};
+          "Alt+Ctrl+X".screenshot-window = {};
+        };
+      };
+    };
+  };
+}
