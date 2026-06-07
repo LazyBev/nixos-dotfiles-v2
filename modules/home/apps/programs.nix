@@ -24,7 +24,7 @@
     ollama
     ocamlPackages.ocaml ocamlPackages.dune_3
     ocamlPackages.findlib ocamlPackages.ocaml-lsp
-    devenv
+    devenv opam
 
     # Virtualisation
     qemu qemu_full
