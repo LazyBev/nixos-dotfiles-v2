@@ -7,10 +7,6 @@
         name = "flathub";
         location = "https://flathub.org/repo/flathub.flatpakrepo";
       }
-      {
-        name = "sober";
-        location = "https://sober.vineelsai.com/repo";
-      }
     ];
     packages = [
       "com.stremio.Stremio"
