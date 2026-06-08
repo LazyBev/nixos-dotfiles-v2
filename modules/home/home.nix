@@ -14,6 +14,11 @@ in {
 
         programs.home-manager.enable = true;
 
+        xdg.userDirs = {
+          enable = true;
+          createDirectories = true;
+        };
+
         programs.bat = {
           enable = true;
           config.theme = "ansi";
