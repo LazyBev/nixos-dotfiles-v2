@@ -9,7 +9,7 @@
     gh pay-respects
 
     # GUI / desktop
-    fuzzel
+    fuzzel searxng
     vscodium
     thunar thunar-archive-plugin thunar-volman tumbler
     networkmanagerapplet
