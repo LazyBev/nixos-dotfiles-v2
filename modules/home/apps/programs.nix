@@ -1,7 +1,7 @@
 { pkgs, inputs, ... }: {
   environment.systemPackages = with pkgs; [
     # TUI / terminal
-    btop delta yazi
+    btop delta yazi tree
     kitty
     zathura imv mpv
     rmpc cava

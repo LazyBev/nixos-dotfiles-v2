@@ -83,6 +83,7 @@
 
     '';
     shellAliases = {
+      clone-nixos = "git clone https://github.com/LazyBev/nixos-cfg ~/nixos-cfg";
       EDITOR = "nvim";
       VISUAL = "nvim";
       ls = "eza";
