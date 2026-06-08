@@ -37,17 +37,13 @@
       mouse = {
         hide-when-typing = "yes";
       };
-      key-bindings = {
-        select-begin = "Control+Space";
-        select-begin-block = "Control+Shift+Space";
-        select-extend-character-wise = "Right";
-        select-extend-line-wise = "Down";
-        select-extend-to-previous-line = "Up";
-        select-extend-to-previous-word = "Control+Left";
-        select-extend-to-next-word = "Control+Right";
-        select-extend-to-start-of-line = "Home";
-        select-extend-to-end-of-line = "End";
-        clipboard-copy = "Control+Shift+c";
+      search-bindings = {
+        extend-char = "Control+Shift+l";
+        extend-backward-char = "Control+Shift+h";
+        extend-line-down = "Control+Shift+j";
+        extend-line-up = "Control+Shift+k";
+        extend-to-word-boundary = "Control+Shift+w";
+        extend-backward-to-word-boundary = "Control+Shift+b";
       };
     };
   };
