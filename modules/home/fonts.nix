@@ -6,7 +6,7 @@ let
 
     src = pkgs.fetchzip {
       url = "https://github.com/shytikov/pragmasevka/releases/download/v${pragmasevka.version}/Pragmasevka_NF.zip";
-      hash = "sha256-0p316wm066xkhk6l0sqsx0jvwib5wn448931syp1qbanzy77bazf=";
+      hash = "";
       stripRoot = false;
     };
 
