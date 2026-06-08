@@ -320,10 +320,6 @@ config.bind(";v", "hint links spawn mpv {hint-url}")
 
 c.content.javascript.log_message.levels = {"userscript:_qute_js": ["error"]}
 
-
-c.hints.find_implementation = "javascript"
-
-
-
+c.url.auto_search = "naive"
 
 config.bind("gK", "open qute://bindings")
