@@ -317,7 +317,6 @@ config.bind("<Escape>", "mode-leave ;; clear-messages ;; search --clear")
 config.bind("gv", "spawn --detach mpv {url} --ytdl-format=bestvideo[height<=1080]+bestaudio/best")
 config.bind(";v", "hint links spawn mpv {hint-url}")
 
-
 c.content.javascript.log_message.levels = {"userscript:_qute_js": ["error"]}
 
 c.url.auto_search = "naive"
