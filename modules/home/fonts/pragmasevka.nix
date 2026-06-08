@@ -1,5 +1,4 @@
-{ pkgs, lib, ... }:
-let
+{ pkgs, lib, ... }: let
   pragmasevka = pkgs.stdenvNoCC.mkDerivation {
     pname = "pragmasevka";
     version = "1.7.0";
@@ -22,15 +21,5 @@ let
     };
   };
 in {
-  fonts = {
-    packages = with pkgs; [
-      pragmasevka
-      nerd-fonts.fira-code
-      nerd-fonts.hack
-      nerd-fonts.symbols-only
-      nerd-fonts.iosevka
-      symbola
-      dejavu_fonts
-    ];
-  };
+  fonts.packages = [ pragmasevka ];
 }

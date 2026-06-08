@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ ... }: {
   environment = {
     variables = {
       GTK_THEME = "Dracula";
@@ -12,17 +12,6 @@
       QT_QPA_PLATFORMTHEME = "gtk3";
       ADW_DISABLE_PORTAL = "1";
       TERMINAL = "foot";
-    };
-  };
-
-  xdg = { 
-    portal = {
-      enable = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gtk
-        xdg-desktop-portal-gnome
-      ];
-      config.common.default = "gtk";
     };
   };
 

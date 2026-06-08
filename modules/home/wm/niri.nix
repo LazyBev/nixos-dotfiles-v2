@@ -1,6 +1,14 @@
-{ inputs, ... }: {
-  perSystem = { pkgs, lib, self', ... }: {
-    packages.myNiri = inputs.wrapper-modules.wrappers.niri.wrap {
+{ inputs, ... }: let
+  inherit (inputs.wrapper-modules.wrappers) niri noctalia-shell;
+  inherit (builtins) fromJSON readFile;
+in {
+  perSystem = { pkgs, lib, self', ... }: let
+    myNoctalia = noctalia-shell.wrap {
+      inherit pkgs;
+      settings = (fromJSON (readFile ../../../configs/apps/noctalia/noctalia.json)).settings;
+    };
+  in {
+    packages.myNiri = niri.wrap {
       inherit pkgs;
       settings = {
         input = {
@@ -16,10 +24,12 @@
           trackpoint = {};
         };
 
-        outputs."eDP-1" = {
-          mode = "1920x1080@120.030";
-          scale = 1.0;
-          transform = "normal";
+        outputs = {
+          "eDP-1" = {
+            mode = "1920x1080@120.030";
+            scale = 1.0;
+            transform = "normal";
+          };
         };
 
         layout = {
@@ -38,7 +48,9 @@
           ];
         };
 
-        animations.slowdown = 1.0;
+        animations = {
+          slowdown = 1.0;
+        };
 
         workspaces = {
           "1" = {};
@@ -85,15 +97,6 @@
 
         screenshot-path = "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
 
-        spawn-at-startup = [
-          [ (lib.getExe pkgs.xwayland-satellite) ]
-          [ (lib.getExe self'.packages.myNoctalia) ]
-          [ (lib.getExe pkgs.fcitx5) "-d" ]
-          [ (lib.getExe pkgs.dunst) ]
-          [ (lib.getExe pkgs.bash) "-lc" "sleep 1 && ${lib.getExe pkgs.networkmanagerapplet} --indicator" ]
-          [ (lib.getExe pkgs.bash) "-lc" "${lib.getExe pkgs.swaybg} -i ~/Pictures/matikanefuku.png" ]
-        ];
-
         prefer-no-csd = true;
 
         environment = {
@@ -117,22 +120,35 @@
           WLR_NO_HARDWARE_CURSORS = "1";
         };
 
-        binds = {
+        spawn-at-startup = let
+          inherit (lib) getExe;
+        in [
+          [ (getExe pkgs.xwayland-satellite) ]
+          [ (getExe myNoctalia) ]
+          [ (getExe pkgs.fcitx5) "-d" ]
+          [ (getExe pkgs.dunst) ]
+          [ (getExe pkgs.bash) "-lc" "sleep 1 && ${getExe pkgs.networkmanagerapplet} --indicator" ]
+          [ (getExe pkgs.bash) "-lc" "${getExe pkgs.swaybg} -i ~/Pictures/matikanefuku.png" ]
+        ];
+
+        binds = let
+          inherit (lib) getExe getExe';
+        in {
           "Alt+Shift+Slash".show-hotkey-overlay = {};
 
-          "Alt+Return".spawn-sh = lib.getExe pkgs.foot;
-          "Alt+B".spawn-sh = lib.getExe pkgs.qutebrowser;
-          "Alt+Shift+B".spawn-sh = lib.getExe pkgs.firefox;
-          "Alt+T".spawn-sh = "${lib.getExe pkgs.foot} -e yazi";
-          "Alt+Shift+T".spawn-sh = lib.getExe pkgs.thunar;
-          "Alt+S".spawn-sh = lib.getExe pkgs.steam;
-          "Alt+D".spawn-sh = lib.getExe pkgs.fuzzel;
-          "Alt+V".spawn-sh = lib.getExe pkgs.vesktop;
-          "Alt+E".spawn-sh = "${lib.getExe pkgs.foot} -e nvim";
-          "Alt+Shift+E".spawn-sh = lib.getExe pkgs.vscodium;
-          "Alt+Y".spawn-sh = lib.getExe pkgs.waypaper;
+          "Alt+Return".spawn-sh = getExe pkgs.foot;
+          "Alt+B".spawn-sh = getExe pkgs.qutebrowser;
+          "Alt+Shift+B".spawn-sh = getExe pkgs.firefox;
+          "Alt+T".spawn-sh = "${getExe pkgs.foot} -e yazi";
+          "Alt+Shift+T".spawn-sh = getExe pkgs.thunar;
+          "Alt+S".spawn-sh = getExe pkgs.steam;
+          "Alt+D".spawn-sh = getExe pkgs.fuzzel;
+          "Alt+V".spawn-sh = getExe pkgs.vesktop;
+          "Alt+E".spawn-sh = "${getExe pkgs.foot} -e nvim";
+          "Alt+Shift+E".spawn-sh = getExe pkgs.vscodium;
+          "Alt+Y".spawn-sh = getExe pkgs.waypaper;
 
-          "Alt+Escape".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call sessionMenu toggle";
+          "Alt+Escape".spawn-sh = "${getExe myNoctalia} ipc call sessionMenu toggle";
 
           "Ctrl+Alt+Q".close-window = {};
 
@@ -184,14 +200,14 @@
           "Alt+F".fullscreen-window = {};
 
           "Alt+Shift+Backspace".quit = {};
-          "Mod+Shift+L".spawn-sh = "${lib.getExe pkgs.gtklock} -s /home/yari/.config/gtklock/style.css -b /home/yari/Pictures/matikanefuku.png";
-          "Alt+Ctrl+P".spawn-sh = "${lib.getExe pkgs.doas} reboot";
-          "Alt+Shift+P".spawn-sh = "${lib.getExe pkgs.doas} poweroff";
+          "Mod+Shift+L".spawn-sh = "${getExe pkgs.gtklock} -s /home/yari/.config/gtklock/style.css -b /home/yari/Pictures/matikanefuku.png";
+          "Alt+Ctrl+P".spawn-sh = "${getExe pkgs.doas} reboot";
+          "Alt+Shift+P".spawn-sh = "${getExe pkgs.doas} poweroff";
 
-          "XF86AudioRaiseVolume".spawn-sh = "${lib.getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 0.1+";
-          "XF86AudioLowerVolume".spawn-sh = "${lib.getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 0.1-";
-          "XF86AudioMute".spawn-sh        = "${lib.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SINK@ toggle";
-          "XF86AudioMicMute".spawn-sh     = "${lib.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+          "XF86AudioRaiseVolume".spawn-sh = "${getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 0.1+";
+          "XF86AudioLowerVolume".spawn-sh = "${getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 0.1-";
+          "XF86AudioMute".spawn-sh        = "${getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SINK@ toggle";
+          "XF86AudioMicMute".spawn-sh     = "${getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
 
           "Alt+X".screenshot = {};
           "Alt+Shift+X".screenshot-screen = {};
@@ -199,5 +215,7 @@
         };
       };
     };
+
+    packages.myNoctalia = myNoctalia;
   };
 }

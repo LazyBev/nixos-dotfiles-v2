@@ -1,0 +1,11 @@
+{ pkgs, ... }: let
+  borePatch = pkgs.fetchpatch {
+    url = "https://raw.githubusercontent.com/firelzrd/bore-scheduler/main/patches/stable/linux-6.18-bore/0001-linux6.18.22-bore-6.6.3.patch";
+    hash = "sha256-snJzD7p19NUrpPsY2R16sJQV/qoOigzVtkhEcRzOvk4=";
+  };
+in {
+  boot.kernelPatches = [{
+    name = "bore-scheduler";
+    patch = borePatch;
+  }];
+}

@@ -1,14 +1,14 @@
 { pkgs, inputs, ... }: {
   environment.systemPackages = with pkgs; [
-    # TUI / terminal
+    # tui
     btop delta yazi tree
     kitty
     zathura imv mpv
     rmpc cava
-    lazygit links2 browsh
+    zellij lazygit links2 browsh
     gh pay-respects
 
-    # GUI / desktop
+    # gui
     fuzzel searxng
     vscodium
     thunar thunar-archive-plugin thunar-volman tumbler
@@ -19,25 +19,24 @@
     steam
     proton-vpn protonmail-desktop
 
-    # Dev / AI
+    # dev
     opencode
     ollama
     ocamlPackages.ocaml ocamlPackages.dune_3
     ocamlPackages.findlib ocamlPackages.ocaml-lsp
     devenv opam
 
-    # Virtualisation
+    # virt
     qemu qemu_full
 
-    # Media / file preview
+    # media
     poppler chafa ffmpegthumbnailer
     libnotify
 
-    # Themes
+    # themes
     catppuccin-sddm catppuccin-cursors.mochaMauve
     dracula-theme dracula-icon-theme
-
-    # Noctalia
+  ] ++ [
     (inputs.wrapper-modules.wrappers.noctalia-shell.wrap {
       inherit pkgs;
       settings =

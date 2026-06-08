@@ -1,6 +1,46 @@
 { ... }: {
   programs.fish = {
     enable = true;
+
+    shellAliases = {
+      clone-nixos = "git clone https://github.com/LazyBev/nixos-cfg ~/nixos-cfg";
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+      ls = "eza";
+      ll = "eza -l";
+      la = "eza -la";
+      lt = "eza -l --tree";
+      fu = "cd ~/nixos-cfg && nix flake update";
+      rb = "doas nixos-rebuild switch --flake ~/nixos-cfg#gentuwu";
+      rb-lap = "doas nixos-rebuild switch --flake ~/nixos-cfg#gentuwu-laptop";
+      sysUpd = "cd ~/nixos-cfg && nix flake update && doas nixos-rebuild switch --flake ~/nixos-cfg#gentuwu";
+      sysUpd-lap = "cd ~/nixos-cfg && nix flake update && doas nixos-rebuild switch --flake ~/nixos-cfg#gentuwu-laptop";
+      battery = "echo \"$(cat /sys/class/power_supply/BAT1/capacity)%\"";
+      ncUpd = "noctalia-shell ipc call state all > ~/nixos-cfg/modules/configs/apps/noctalia/noctalia.json";
+      gen-list = "doas nixos-rebuild list-generations";
+      gc-old = "doas nix-env --delete-generations old -p /nix/var/nix/profiles/system && nix-collect-garbage -d && doas nix-collect-garbage -d && doas nixos-rebuild list-generations";
+
+      gif = "ffmpeg -vf \"fps=10,scale=720:-1:flags=lanczos,split[s0][s1];[s0]palettegen=max_colors=256[p];[s1][p]paletteuse=dither=bayer\"";
+      gifslow = "ffmpeg -vf \"fps=5,scale=720:-1:flags=lanczos,split[s0][s1];[s0]palettegen=max_colors=256[p];[s1][p]paletteuse=dither=bayer\"";
+      "rec" = "ffmpeg -f x11grab -video_size 1920x1080 -framerate 30 -i :0.0 -c:v libx264 -preset ultrafast -pix_fmt yuv420p";
+      reca = "ffmpeg -f pulse -i default -c:a libmp3lame -q:a 2";
+      get_audio = "ffmpeg -vn -c:a libmp3lame -q:a 2";
+      screenshot = "ffmpeg -f x11grab -video_size 1920x1080 -framerate 1 -i :0.0 -vframes 1";
+      h264 = "ffmpeg -c:v libx264 -crf 23 -c:a aac";
+      h265 = "ffmpeg -c:v libx265 -crf 28 -c:a aac -b:a 128k";
+      vp9 = "ffmpeg -c:v libvpx-vp9 -crf 30 -b:v 0 -c:a libopus";
+      av1 = "ffmpeg -c:v libsvtav1 -crf 35 -preset 8 -c:a libopus";
+      prores = "ffmpeg -c:v prores_ks -profile:v 3 -vendor apl0 -c:a pcm_s16le";
+      define = "curl -s \"dict://dict.org/d:\"";
+    };
+
+    shellAbbrs = {
+      n = "nix";
+      nf = "nix flake";
+      ns = "nix search";
+      ne = "nix-env";
+    };
+
     interactiveShellInit = ''
       set fish_greeting
 
@@ -80,45 +120,6 @@
               command doas $argv
           end
       end
-
     '';
-    shellAliases = {
-      clone-nixos = "git clone https://github.com/LazyBev/nixos-cfg ~/nixos-cfg";
-      EDITOR = "nvim";
-      VISUAL = "nvim";
-      ls = "eza";
-      ll = "eza -l";
-      la = "eza -la";
-      lt = "eza -l --tree";
-      fu = "cd ~/nixos-cfg && nix flake update";
-      rb = "doas nixos-rebuild switch --flake ~/nixos-cfg#gentuwu";
-      rb-lap = "doas nixos-rebuild switch --flake ~/nixos-cfg#gentuwu-laptop";
-      sysUpd = "cd ~/nixos-cfg && nix flake update && doas nixos-rebuild switch --flake ~/nixos-cfg#gentuwu";
-      sysUpd-lap = "cd ~/nixos-cfg && nix flake update && doas nixos-rebuild switch --flake ~/nixos-cfg#gentuwu-laptop";
-      battery = "echo \"$(cat /sys/class/power_supply/BAT1/capacity)%\"";
-      ncUpd = "noctalia-shell ipc call state all > ~/nixos-cfg/modules/configs/apps/noctalia/noctalia.json";
-      gen-list = "doas nixos-rebuild list-generations";
-      gc-old = "doas nix-env --delete-generations old -p /nix/var/nix/profiles/system && nix-collect-garbage -d && doas nix-collect-garbage -d && doas nixos-rebuild list-generations";
-
-      gif = "ffmpeg -vf \"fps=10,scale=720:-1:flags=lanczos,split[s0][s1];[s0]palettegen=max_colors=256[p];[s1][p]paletteuse=dither=bayer\"";
-      gifslow = "ffmpeg -vf \"fps=5,scale=720:-1:flags=lanczos,split[s0][s1];[s0]palettegen=max_colors=256[p];[s1][p]paletteuse=dither=bayer\"";
-      "rec" = "ffmpeg -f x11grab -video_size 1920x1080 -framerate 30 -i :0.0 -c:v libx264 -preset ultrafast -pix_fmt yuv420p";
-      reca = "ffmpeg -f pulse -i default -c:a libmp3lame -q:a 2";
-      get_audio = "ffmpeg -vn -c:a libmp3lame -q:a 2";
-      screenshot = "ffmpeg -f x11grab -video_size 1920x1080 -framerate 1 -i :0.0 -vframes 1";
-      h264 = "ffmpeg -c:v libx264 -crf 23 -c:a aac";
-      h265 = "ffmpeg -c:v libx265 -crf 28 -c:a aac -b:a 128k";
-      vp9 = "ffmpeg -c:v libvpx-vp9 -crf 30 -b:v 0 -c:a libopus";
-      av1 = "ffmpeg -c:v libsvtav1 -crf 35 -preset 8 -c:a libopus";
-      prores = "ffmpeg -c:v prores_ks -profile:v 3 -vendor apl0 -c:a pcm_s16le";
-
-      define = "curl -s \"dict://dict.org/d:\"";
-    };
-    shellAbbrs = {
-      n = "nix";
-      nf = "nix flake";
-      ns = "nix search";
-      ne = "nix-env";
-    };
   };
 }

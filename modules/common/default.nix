@@ -8,12 +8,13 @@
 
     imports = [
       ../core/boot
+      ../core/power
       ../core/programs
       ../core/services
       ../home/apps
       ../home/services
-      ../home/environment.nix
-      ../home/fonts.nix
+      ../home/env
+      ../home/fonts
       ../home/security.nix
       ../hosts/gentuwu/disk-desktop.nix
       ../hosts/gentuwu/nvidia-desktop.nix
@@ -22,6 +23,8 @@
     ];
 
     config = {
+      gentuwu.powerProfiles.enable = lib.mkDefault true;
+      gentuwu.powerProfiles.default = lib.mkDefault "performance";
       gentuwu.desktopHardware.enable = lib.mkDefault (config.gentuwu.hostType == "desktop");
       gentuwu.nvidia.enable = lib.mkDefault (config.gentuwu.hostType == "desktop");
       gentuwu.laptopHardware.enable = lib.mkDefault (config.gentuwu.hostType == "laptop");

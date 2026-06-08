@@ -38,6 +38,7 @@
         hide-when-typing = "yes";
       };
       search-bindings = {
+        extend-to-next-whitespace = "none";
         extend-char = "Control+Shift+l";
         extend-backward-char = "Control+Shift+h";
         extend-line-down = "Control+Shift+j";
