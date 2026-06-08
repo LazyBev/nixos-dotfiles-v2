@@ -213,7 +213,7 @@ config.bind("D", "undo")
 config.bind("u", "undo")
 
 config.bind("f", "hint")
-config.bind("F", "hint --tab")
+config.bind("F", "hint links tab")
 
 config.bind("gi", "hint inputs --first")
 
