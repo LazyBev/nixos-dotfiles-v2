@@ -1,8 +1,31 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }:
+let
+  pragmasevka = pkgs.stdenvNoCC.mkDerivation {
+    pname = "pragmasevka";
+    version = "1.7.0";
+
+    src = pkgs.fetchzip {
+      url = "https://github.com/shytikov/pragmasevka/releases/download/v${pragmasevka.version}/Pragmasevka_NF.zip";
+      hash = "sha256-0p316wm066xkhk6l0sqsx0jvwib5wn448931syp1qbanzy77bazf=";
+      stripRoot = false;
+    };
+
+    installPhase = ''
+      mkdir -p $out/share/fonts/truetype
+      find . -name '*.ttf' -exec cp {} $out/share/fonts/truetype/ \;
+    '';
+
+    meta = {
+      description = "Pragmata Pro doppelgänger made of Iosevka SS08";
+      homepage = "https://github.com/shytikov/pragmasevka";
+      license = lib.licenses.ofl;
+    };
+  };
+in {
   fonts = {
     packages = with pkgs; [
+      pragmasevka
       nerd-fonts.fira-code
-      nerd-fonts.jetbrains-mono
       nerd-fonts.hack
       nerd-fonts.symbols-only
       nerd-fonts.iosevka

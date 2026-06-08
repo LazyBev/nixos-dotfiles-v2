@@ -3,7 +3,7 @@
     enable = true;
     settings = {
       main = {
-        font = "JetBrainsMono Nerd Font:size=11";
+        font = "Pragmasevka Nerd Font:size=11";
         term = "xterm-256color";
         dpi-aware = "yes";
         initial-window-size-pixels = "1000x600";

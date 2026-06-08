@@ -274,8 +274,8 @@
       "smoothScrollEnabled": true
     },
     "ui": {
-      "fontDefault": "JetBrainsMono NF",
-      "fontFixed": "JetBrainsMono NF SemiBold",
+      "fontDefault": "Pragmasevka NF",
+      "fontFixed": "Pragmasevka NF SemiBold",
       "fontDefaultScale": 1,
       "fontFixedScale": 1,
       "tooltipsEnabled": true,

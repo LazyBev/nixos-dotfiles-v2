@@ -98,16 +98,16 @@ c.aliases = {
 }
 
 # Fonts
-c.fonts.default_family = "JetBrainsMono Nerd Font"
+c.fonts.default_family = "Pragmasevka Nerd Font"
 c.fonts.default_size = "11pt"
-c.fonts.tabs.selected = "11pt JetBrainsMono Nerd Font"
-c.fonts.tabs.unselected = "11pt JetBrainsMono Nerd Font"
-c.fonts.statusbar = "11pt JetBrainsMono Nerd Font"
-c.fonts.prompts = "11pt JetBrainsMono Nerd Font"
-c.fonts.downloads = "11pt JetBrainsMono Nerd Font"
-c.fonts.keyhint = "11pt JetBrainsMono Nerd Font"
-c.fonts.completion.entry = "11pt JetBrainsMono Nerd Font"
-c.fonts.completion.category = "11pt JetBrainsMono Nerd Font"
+c.fonts.tabs.selected = "11pt Pragmasevka Nerd Font"
+c.fonts.tabs.unselected = "11pt Pragmasevka Nerd Font"
+c.fonts.statusbar = "11pt Pragmasevka Nerd Font"
+c.fonts.prompts = "11pt Pragmasevka Nerd Font"
+c.fonts.downloads = "11pt Pragmasevka Nerd Font"
+c.fonts.keyhint = "11pt Pragmasevka Nerd Font"
+c.fonts.completion.entry = "11pt Pragmasevka Nerd Font"
+c.fonts.completion.category = "11pt Pragmasevka Nerd Font"
 
 # URLs
 c.url.default_page = "about:blank"

@@ -5,7 +5,7 @@
     theme = "catppuccin-mocha-mauve";
     settings = {
       Theme = {
-        Font = "JetBrainsMono Nerd Font";
+        Font = "Pragmasevka Nerd Font";
       };
       Cursor = {
         Theme = "catppuccin-mocha-mauve-cursors";

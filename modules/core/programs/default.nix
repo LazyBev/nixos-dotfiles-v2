@@ -7,7 +7,7 @@
     fastfetch file
     p7zip unzip unar
     e2fsprogs dosfstools grub2
-    just
+    just dysk
     gh lazygit
     ffmpeg
     tealdeer

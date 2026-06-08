@@ -50,7 +50,7 @@ in {
             package = pkgs.dracula-icon-theme;
           };
           font = {
-            name = "JetBrainsMono Nerd Font";
+            name = "Pragmasevka Nerd Font";
             size = 10;
           };
           gtk2.force = true;
@@ -73,7 +73,7 @@ in {
             icon-theme = "Dracula";
             cursor-theme = "catppuccin-mocha-mauve-cursors";
             cursor-size = 24;
-            font-name = "JetBrainsMono Nerd Font 10";
+            font-name = "Pragmasevka Nerd Font 10";
           };
         };
 
