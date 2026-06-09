@@ -2,7 +2,9 @@
   cfg = config.gentuwu.powerProfiles;
   scxPkg = pkgs.scx.full;
 
-  profileScript = pkgs.writeShellScriptBin "power-profile" ''
+  applyScript = pkgs.writeShellScript "power-profile-apply" ''
+    set -eu
+
     set_governor() {
       for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do
         echo "$1" > "$cpu" 2>/dev/null || true
@@ -38,7 +40,7 @@
       done
     }
 
-    case "''${1:-status}" in
+    case "''${1:-}" in
       performance)
         systemctl start scx-bpfland 2>/dev/null || true
         set_governor performance
@@ -63,8 +65,6 @@
         echo high > /sys/class/drm/card0/device/power_dpm_force_performance_level 2>/dev/null || true
         echo 0 > /sys/class/drm/card0/power_dc 2>/dev/null || true
         cat /sys/class/drm/card1/gt_RP1_freq_mhz > /sys/class/drm/card1/gt_max_freq_mhz 2>/dev/null || true
-
-        echo "→ performance (SCX bpfland)"
         ;;
       balanced)
         systemctl stop scx-bpfland 2>/dev/null || true
@@ -89,8 +89,6 @@
 
         echo auto > /sys/class/drm/card0/device/power_dpm_force_performance_level 2>/dev/null || true
         for_each_sata med_power_with_dipm
-
-        echo "→ balanced (BORE/EEVDF, schedutil)"
         ;;
       battery)
         systemctl stop scx-bpfland 2>/dev/null || true
@@ -123,8 +121,15 @@
         echo low > /sys/class/drm/card0/device/power_dpm_force_performance_level 2>/dev/null || true
         echo 1 > /sys/class/drm/card0/power_dc 2>/dev/null || true
         echo 200 > /sys/class/drm/card1/gt_max_freq_mhz 2>/dev/null || true
+        ;;
+    esac
+  '';
 
-        echo "→ battery (BORE/EEVDF, freq capped at 40%)"
+  cliScript = pkgs.writeShellScriptBin "power-profile" ''
+    case "''${1:-status}" in
+      performance|balanced|battery)
+        systemctl start "power-profile@''${1}.service"
+        echo "→ switched to ''${1}"
         ;;
       status)
         printf "%-18s %s\n" "scheduler:"       "$(systemctl is-active scx-bpfland 2>/dev/null | sed 's/inactive/BORE (EEVDF)/;s/active/SCX bpfland/')"
@@ -139,7 +144,7 @@
         printf "%-18s %s\n" "sata_lpm:"         "$(cat /sys/class/scsi_host/host0/link_power_management_policy 2>/dev/null || echo N/A)"
         ;;
       *)
-        echo "Usage: power-profile {performance|balanced|battery|status}" >&2
+        echo "Usage: power-profile {performance|balanced|battery|status|help}" >&2
         exit 1
         ;;
     esac
@@ -154,7 +159,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ profileScript scxPkg ];
+    environment.systemPackages = [ cliScript scxPkg ];
 
     boot.kernel.sysctl = {
       "vm.swappiness" = lib.mkOverride 50 (
@@ -193,7 +198,15 @@ in {
       after = [ "sysinit.target" ];
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = "${profileScript}/bin/power-profile ${cfg.default}";
+        ExecStart = "${applyScript} ${cfg.default}";
+      };
+    };
+
+    systemd.services."power-profile@" = {
+      description = "Apply power profile %I";
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${applyScript} %I";
       };
     };
   };
