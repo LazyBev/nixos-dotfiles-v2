@@ -6,10 +6,10 @@ update:
 	nix flake update
 
 upgrade:
-	doas nixos-rebuild switch --flake .#gentuwu
+	doas nixos-rebuild switch --flake .#gentuwu -j$(nproc)
 
 upgrade-laptop:
-	doas nixos-rebuild switch --flake .#gentuwu-laptop
+	doas nixos-rebuild switch --flake .#gentuwu-laptop -j$(nproc)
 
 gc:
 	doas nix-collect-garbage --delete-older-than 30d
@@ -24,10 +24,10 @@ clean:
 	nix-collect-garbage -d
 
 sysupd:
-	nix flake update && doas nixos-rebuild switch --flake .#gentuwu
+	nix flake update && doas nixos-rebuild switch --flake .#gentuwu -j$(nproc)
 
 sysupd-laptop:
-	nix flake update && doas nixos-rebuild switch --flake .#gentuwu-laptop
+	nix flake update && doas nixos-rebuild switch --flake .#gentuwu-laptop -j$(nproc)
 
 devenv-shell:
 	devenv shell
