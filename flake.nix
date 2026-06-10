@@ -16,11 +16,16 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    omnisearch = {
+      url = "git+https://git.bwaaa.monster/omnisearch";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-    imports = [
-      ./modules/default.nix
-    ];
-  };
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+      imports = [
+        ./modules/default.nix
+      ];
+    };
 }
