@@ -1,4 +1,6 @@
-{
+let
+  vars = import ../../../vars.nix;
+in {
   pkgs,
   inputs,
   ...
@@ -64,19 +66,10 @@
       # themes
       catppuccin-sddm
       catppuccin-cursors.mochaMauve
-      dracula-theme
       dracula-icon-theme
-      (pkgs.stdenvNoCC.mkDerivation {
-        pname = "caelus-theme";
-        version = "1.0.0";
-        src = ../../../../themes/caelus-custom;
-        installPhase = ''
-          mkdir -p $out/share/themes/caelus-custom
-          cp -r * $out/share/themes/caelus-custom/
-        '';
-        meta.description = "caelus GTK theme";
-      })
     ]
+    ++ (pkgs.lib.optional (vars.systemTheme == "dracula") pkgs.dracula-theme)
+    ++ (pkgs.lib.optional (vars.systemTheme == "caelus") pkgs.caelus-theme)
     ++ [
       (inputs.wrapper-modules.wrappers.noctalia-shell.wrap {
         inherit pkgs;

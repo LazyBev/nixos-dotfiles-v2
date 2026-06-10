@@ -1,15 +1,24 @@
 let
   vars = import ../../../vars.nix;
-in { pkgs, ... }: {
+in { pkgs, ... }: let
+  gtkPackage = {
+    dracula = pkgs.dracula-theme;
+    caelus = pkgs.caelus-theme;
+  }.${vars.systemTheme};
+  iconPackage = {
+    dracula = pkgs.dracula-icon-theme;
+    caelus = pkgs.dracula-icon-theme;
+  }.${vars.systemTheme};
+in {
   gtk = {
     enable = true;
     theme = {
       name = vars.theme;
-      package = pkgs.dracula-theme;
+      package = gtkPackage;
     };
     iconTheme = {
       name = vars.theme;
-      package = pkgs.dracula-icon-theme;
+      package = iconPackage;
     };
     font = {
       name = vars.font;
