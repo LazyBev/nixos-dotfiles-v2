@@ -1,4 +1,3 @@
-i
 {...}: {
   imports = [../nixos/omnisearch.nix];
   services.omnisearch = {
