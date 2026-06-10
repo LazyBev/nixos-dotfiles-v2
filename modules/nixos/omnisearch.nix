@@ -76,7 +76,6 @@ in {
         BindReadOnlyPaths = [
           "${cfg.package}/share/omnisearch/templates:/var/lib/omnisearch/templates"
           "${cfg.package}/share/omnisearch/static:/var/lib/omnisearch/static"
-          "${cfg.package}/share/omnisearch/locales:/var/lib/omnisearch/locales"
           "${finalConfigFile}:/var/lib/omnisearch/config.ini"
         ];
         DynamicUser = true;

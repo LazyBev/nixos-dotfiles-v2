@@ -112,7 +112,7 @@ c.url.default_page = "about:blank"
 c.url.start_pages = ["about:blank"]
 c.url.auto_search = "naive"
 c.url.searchengines = {
-    "DEFAULT": "http://localhost:8080/search?q={}",
+    "DEFAULT": "http://localhost:8087/?search={}",
     "!a": "https://wiki.archlinux.org/?search={}",
     "!aw": "https://wiki.archlinux.org/?search={}",
     "!n": "https://wiki.nixos.org/?search={}",
@@ -342,4 +342,3 @@ config.bind(
     "gv",
     "spawn --detach mpv {url} --ytdl-format=bestvideo[height<=1080]+bestaudio/best",
 )
-

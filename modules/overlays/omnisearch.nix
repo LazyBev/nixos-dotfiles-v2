@@ -40,7 +40,7 @@ in {
     installPhase = ''
       mkdir -p $out/bin $out/share/omnisearch
       install -Dm755 bin/omnisearch $out/bin/omnisearch
-      cp -r templates static locales -t $out/share/omnisearch/
+      cp -r templates static -t $out/share/omnisearch/
     '';
   };
 }

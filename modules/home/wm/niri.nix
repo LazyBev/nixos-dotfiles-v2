@@ -103,6 +103,12 @@ in {
             matches = [{app-id = "^thunar$";}];
             default-column-width.proportion = 0.5;
           }
+          {
+            matches = [{app-id = "^mpv$";}];
+            open-floating = true;
+            default-column-width = {fixed = 640;};
+            default-window-height = {fixed = 360;};
+          }
         ];
 
         screenshot-path = "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";

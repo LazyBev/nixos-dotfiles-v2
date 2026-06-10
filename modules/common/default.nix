@@ -1,11 +1,19 @@
-{ inputs, ... }: {
-  flake.nixosModules.common = { config, lib, ... }: {
+{
+  inputs,
+  self,
+  ...
+}: {
+  flake.nixosModules.common = {
+    config,
+    lib,
+    self,
+    ...
+  }: {
     options.gentuwu.hostType = lib.mkOption {
-      type = lib.types.enum [ "desktop" "laptop" ];
+      type = lib.types.enum ["desktop" "laptop"];
       default = "desktop";
       description = "Whether this machine is a desktop or laptop";
     };
-
     imports = [
       ../core/boot
       ../core/power
@@ -20,8 +28,8 @@
       ../hosts/gentuwu/nvidia-desktop.nix
       ../hosts/gentuwu-laptop/disk-laptop.nix
       ../hosts/gentuwu-laptop/nvidia-laptop.nix
+      self.nixosModules.overlays
     ];
-
     config = {
       gentuwu.powerProfiles.enable = lib.mkDefault true;
       gentuwu.powerProfiles.default = lib.mkDefault "performance";
