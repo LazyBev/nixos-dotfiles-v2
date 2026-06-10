@@ -4,6 +4,9 @@
     enable = true;
     theme = "catppuccin-mocha-mauve";
     settings = {
+      General = {
+        AllowRootLogin = true;
+      };
       Theme = {
         Font = vars.font;
       };

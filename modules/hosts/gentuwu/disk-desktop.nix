@@ -27,23 +27,23 @@
               mountOptions = [ "fmask=0077" "dmask=0077" ];
             };
           };
+          swap = {
+            name = "swap";
+            label = "swap";
+            size = "16G";
+            content = {
+              type = "swap";
+              discardPolicy = "both";
+            };
+          };
           root = {
             name = "root";
             label = "root";
-            size = "467G";
+            size = "100%";
             content = {
               type = "filesystem";
               format = "ext4";
               mountpoint = "/";
-            };
-          };
-          swap = {
-            name = "swap";
-            label = "swap";
-            size = "100%";
-            content = {
-              type = "swap";
-              discardPolicy = "both";
             };
           };
         };
