@@ -4,7 +4,6 @@
 
 theme "dracula"
 
-// UI
 pane_frames false
 simplified_ui false
 ui {
@@ -14,17 +13,10 @@ ui {
     }
 }
 
-// Mouse
 mouse_mode true
-
-// Scrollback
 scroll_buffer_size 10000
-
-// Copy
 copy_command "wl-copy"
 copy_on_select true
-
-// On exit
 on_force_close "detach"
 
 // =============================================================================
@@ -32,13 +24,12 @@ on_force_close "detach"
 // =============================================================================
 keybinds clear-defaults=true {
 
-    // --- Normal (locked) mode — no prefix, direct input ---
+    // --- Locked mode ---
     locked {
         bind "Ctrl g" { SwitchToMode "Normal"; }
     }
 
     // --- Normal mode ---
-    // (default mode, all keybinds active — press Ctrl+g to lock/unlock)
     normal {
         bind "Ctrl g" { SwitchToMode "Locked"; }
         bind "Ctrl p" { SwitchToMode "Pane"; }
@@ -46,12 +37,12 @@ keybinds clear-defaults=true {
         bind "Ctrl n" { SwitchToMode "Resize"; }
         bind "Ctrl s" { SwitchToMode "Scroll"; }
         bind "Ctrl o" { SwitchToMode "Session"; }
+        bind "Ctrl h" { SwitchToMode "Move"; }
         bind "Ctrl q" { Quit; }
         bind "Ctrl d" { Detach; }
     }
 
     // --- Pane mode ---
-    // (press Ctrl+p in normal mode — manage panes)
     pane {
         bind "Esc" "Ctrl p" { SwitchToMode "Normal"; }
         bind "h" { MoveFocus "Left"; }
@@ -71,7 +62,6 @@ keybinds clear-defaults=true {
     }
 
     // --- Tab mode ---
-    // (press Ctrl+t in normal mode — manage tabs)
     tab {
         bind "Esc" "Ctrl t" { SwitchToMode "Normal"; }
         bind "h" "Left" { GoToPreviousTab; }
@@ -94,7 +84,6 @@ keybinds clear-defaults=true {
     }
 
     // --- Resize mode ---
-    // (press Ctrl+n in normal mode — resize panes)
     resize {
         bind "Esc" "Ctrl n" { SwitchToMode "Normal"; }
         bind "h" "Left"  { Resize "Increase Left"; }
@@ -110,9 +99,8 @@ keybinds clear-defaults=true {
     }
 
     // --- Move mode ---
-    // (press Ctrl+m in normal mode — move panes around)
     move {
-        bind "Esc" "Ctrl m" { SwitchToMode "Normal"; }
+        bind "Esc" "Ctrl h" { SwitchToMode "Normal"; }
         bind "h" "Left"  { MovePane "Left"; }
         bind "l" "Right" { MovePane "Right"; }
         bind "j" "Down"  { MovePane "Down"; }
@@ -121,24 +109,27 @@ keybinds clear-defaults=true {
     }
 
     // --- Scroll mode ---
-    // (press Ctrl+s in normal mode — scroll through pane output)
     scroll {
         bind "Esc" "Ctrl s" { SwitchToMode "Normal"; }
         bind "j" "Down"  { ScrollDown; }
         bind "k" "Up"    { ScrollUp; }
         bind "d" { HalfPageScrollDown; }
         bind "u" { HalfPageScrollUp; }
-        bind "f" { PageScrollDown; }
-        bind "b" { PageScrollUp; }
+        bind "f" "PageDown" { PageScrollDown; }
+        bind "b" "PageUp"   { PageScrollUp; }
         bind "g" { ScrollToTop; }
         bind "G" { ScrollToBottom; }
-        bind "/" { SwitchToMode "EnterSearch"; SearchInput 0; }
-        bind "e" { EditScrollback; SwitchToMode "Normal"; }
         bind "s" { SwitchToMode "EnterSearch"; SearchInput 0; }
+        bind "e" { EditScrollback; SwitchToMode "Normal"; }
+    }
+
+    // --- EnterSearch mode ---
+    entersearch {
+        bind "Esc" "Ctrl s" { SwitchToMode "Scroll"; }
+        bind "Enter" { SwitchToMode "Search"; }
     }
 
     // --- Search mode ---
-    // (press / or s in scroll mode — search through scrollback)
     search {
         bind "Esc" "Ctrl s" { SwitchToMode "Normal"; }
         bind "n" { Search "Down"; }
@@ -149,26 +140,98 @@ keybinds clear-defaults=true {
     }
 
     // --- Session mode ---
-    // (press Ctrl+o in normal mode — manage sessions)
     session {
         bind "Esc" "Ctrl o" { SwitchToMode "Normal"; }
         bind "d" { Detach; }
-        bind "w" { LaunchOrFocusPlugin "session-manager" { floating true; move_to_focused_tab true; }; SwitchToMode "Normal"; }
-        bind "c" { LaunchOrFocusPlugin "configuration" { floating true; move_to_focused_tab true; }; SwitchToMode "Normal"; }
+        bind "w" {
+            LaunchOrFocusPlugin "session-manager" {
+                floating true
+                move_to_focused_tab true
+            };
+            SwitchToMode "Normal"
+        }
+        bind "c" {
+            LaunchOrFocusPlugin "configuration" {
+                floating true
+                move_to_focused_tab true
+            };
+            SwitchToMode "Normal"
+        }
     }
 
     // --- RenamePane mode ---
-    // (press i in pane mode — rename the focused pane)
     renamepane {
         bind "Esc" { UndoRenamePane; SwitchToMode "Pane"; }
-        bind "Enter"  { SwitchToMode "Normal"; }
+        bind "Enter" { SwitchToMode "Normal"; }
     }
 
     // --- RenameTab mode ---
-    // (press i in tab mode — rename the focused tab)
     renametab {
         bind "Esc" { UndoRenameTab; SwitchToMode "Tab"; }
-        bind "Enter"  { SwitchToMode "Normal"; }
+        bind "Enter" { SwitchToMode "Normal"; }
+    }
+
+    // --- Shared binds (Super/Windows key, available everywhere except locked) ---
+    shared_except "locked" {
+        bind "Ctrl g" { SwitchToMode "Locked"; }
+        bind "Ctrl q" { Quit; }
+        bind "Super f" { ToggleFloatingPanes; }
+        bind "Super n" { NewPane; }
+        bind "Super i" { MoveTab "Left"; }
+        bind "Super o" { MoveTab "Right"; }
+        bind "Super h" "Super Left"  { MoveFocusOrTab "Left"; }
+        bind "Super l" "Super Right" { MoveFocusOrTab "Right"; }
+        bind "Super j" "Super Down"  { MoveFocus "Down"; }
+        bind "Super k" "Super Up"    { MoveFocus "Up"; }
+        bind "Super =" "Super +" { Resize "Increase"; }
+        bind "Super -" { Resize "Decrease"; }
+        bind "Super [" { PreviousSwapLayout; }
+        bind "Super ]" { NextSwapLayout; }
+        bind "Super p" { TogglePaneInGroup; }
+        bind "Super Shift p" { ToggleGroupMarking; }
+        bind "Super 1" { GoToTab 1; }
+        bind "Super 2" { GoToTab 2; }
+        bind "Super 3" { GoToTab 3; }
+        bind "Super 4" { GoToTab 4; }
+        bind "Super 5" { GoToTab 5; }
+        bind "Super 6" { GoToTab 6; }
+        bind "Super 7" { GoToTab 7; }
+        bind "Super 8" { GoToTab 8; }
+        bind "Super 9" { GoToTab 9; }
+        bind "Super t" { NewTab; }
+        bind "Super w" { CloseTab; }
+        bind "Super x" { CloseFocus; }
+        bind "Super d" { Detach; }
+        bind "Super s" { SwitchToMode "Scroll"; }
+        bind "Super r" { SwitchToMode "Resize"; }
+    }
+
+    shared_except "normal" "locked" {
+        bind "Enter" "Esc" { SwitchToMode "Normal"; }
+    }
+
+    shared_except "pane" "locked" {
+        bind "Ctrl p" { SwitchToMode "Pane"; }
+    }
+
+    shared_except "resize" "locked" {
+        bind "Ctrl n" { SwitchToMode "Resize"; }
+    }
+
+    shared_except "scroll" "locked" {
+        bind "Ctrl s" { SwitchToMode "Scroll"; }
+    }
+
+    shared_except "session" "locked" {
+        bind "Ctrl o" { SwitchToMode "Session"; }
+    }
+
+    shared_except "tab" "locked" {
+        bind "Ctrl t" { SwitchToMode "Tab"; }
+    }
+
+    shared_except "move" "locked" {
+        bind "Ctrl h" { SwitchToMode "Move"; }
     }
 }
 
