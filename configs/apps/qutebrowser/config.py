@@ -108,8 +108,8 @@ c.fonts.completion.category = "11pt Pragmasevka Nerd Font"
 # =============================================================================
 # URLs & Search
 # =============================================================================
-c.url.default_page = "about:blank"
-c.url.start_pages = ["about:blank"]
+c.url.default_page = "http://localhost:8087"
+c.url.start_pages = ["http://localhost:8087"]
 c.url.auto_search = "naive"
 c.url.searchengines = {
     "DEFAULT": "http://localhost:8087/?search={}",
