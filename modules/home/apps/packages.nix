@@ -20,6 +20,7 @@
     proton-vpn protonmail-desktop
 
     # dev
+    tcc
     opencode
     ollama
     ocamlPackages.ocaml ocamlPackages.dune_3
