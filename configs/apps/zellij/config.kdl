@@ -159,14 +159,14 @@ keybinds clear-defaults=true {
 
     // --- RenamePane mode ---
     // (press i in pane mode — rename the focused pane)
-    renamePane {
+    renamepane {
         bind "Esc" { UndoRenamePane; SwitchToMode "Pane"; }
         bind "Enter"  { SwitchToMode "Normal"; }
     }
 
     // --- RenameTab mode ---
     // (press i in tab mode — rename the focused tab)
-    renameTab {
+    renametab {
         bind "Esc" { UndoRenameTab; SwitchToMode "Tab"; }
         bind "Enter"  { SwitchToMode "Normal"; }
     }
