@@ -1,5 +1,9 @@
-{ inputs, ... }: {
-  imports = [ inputs.nvf.nixosModules.default ];
+{
+  inputs,
+  pkgs,
+  ...
+}: {
+  imports = [inputs.nvf.nixosModules.default];
 
   programs.nvf = {
     enable = true;
@@ -7,6 +11,7 @@
       viAlias = false;
       vimAlias = true;
       enableLuaLoader = true;
+      extraPackages = with pkgs; [wl-clipboard];
 
       opts = {
         number = true;
@@ -26,6 +31,7 @@
         undofile = true;
         wrap = false;
         cursorline = true;
+        clipboard = "unnamedplus";
       };
 
       theme = {
@@ -312,6 +318,13 @@
           action = "<cmd>e #<CR>";
           silent = true;
           desc = "Switch to other buffer";
+        }
+        {
+          key = "<leader>?";
+          mode = "n";
+          action = "<cmd>WhichKey<CR>";
+          silent = true;
+          desc = "Show all keybinds";
         }
       ];
     };
