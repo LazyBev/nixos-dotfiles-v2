@@ -1,8 +1,13 @@
-{ inputs, ... }: let
+{inputs, ...}: let
   inherit (inputs.wrapper-modules.wrappers) niri noctalia-shell;
   inherit (builtins) fromJSON readFile;
 in {
-  perSystem = { pkgs, lib, self', ... }: let
+  perSystem = {
+    pkgs,
+    lib,
+    self',
+    ...
+  }: let
     myNoctalia = noctalia-shell.wrap {
       inherit pkgs;
       settings = (fromJSON (readFile ../../../configs/apps/noctalia/noctalia.json)).settings;
@@ -43,8 +48,8 @@ in {
           };
           border.off = {};
           preset-column-widths = [
-            { proportion = 0.5; }
-            { proportion = 1.0; }
+            {proportion = 0.5;}
+            {proportion = 1.0;}
           ];
         };
 
@@ -70,27 +75,32 @@ in {
             clip-to-geometry = true;
           }
           {
-            matches = [{ app-id = "zen$"; title = "^Picture-in-Picture$"; }];
+            matches = [
+              {
+                app-id = "zen$";
+                title = "^Picture-in-Picture$";
+              }
+            ];
             open-floating = true;
           }
           {
-            matches = [{ title = "^Picture-in-Picture$"; }];
+            matches = [{title = "^Picture-in-Picture$";}];
             open-floating = true;
           }
           {
-            matches = [{ app-id = "^pavucontrol$"; }];
+            matches = [{app-id = "^pavucontrol$";}];
             open-floating = true;
           }
           {
-            matches = [{ app-id = "^nm-connection-editor$"; }];
+            matches = [{app-id = "^nm-connection-editor$";}];
             open-floating = true;
           }
           {
-            matches = [{ app-id = "^foot$"; }];
+            matches = [{app-id = "^foot$";}];
             default-column-width.proportion = 0.5;
           }
           {
-            matches = [{ app-id = "^thunar$"; }];
+            matches = [{app-id = "^thunar$";}];
             default-column-width.proportion = 0.5;
           }
         ];
@@ -123,12 +133,12 @@ in {
         spawn-at-startup = let
           inherit (lib) getExe;
         in [
-          [ (getExe pkgs.xwayland-satellite) ]
-          [ (getExe myNoctalia) ]
-          [ (getExe pkgs.fcitx5) "-d" ]
-          [ (getExe pkgs.dunst) ]
-          [ (getExe pkgs.bash) "-lc" "sleep 1 && ${getExe pkgs.networkmanagerapplet} --indicator" ]
-          [ (getExe pkgs.bash) "-lc" "${getExe pkgs.swaybg} -i ~/Pictures/matikanefuku.png" ]
+          [(getExe pkgs.xwayland-satellite)]
+          [(getExe myNoctalia)]
+          [(getExe pkgs.fcitx5) "-d"]
+          [(getExe pkgs.dunst)]
+          [(getExe pkgs.bash) "-lc" "sleep 1 && ${getExe pkgs.networkmanagerapplet} --indicator"]
+          [(getExe pkgs.bash) "-lc" "${getExe pkgs.swaybg} -i ~/Pictures/matikanefuku.png"]
         ];
 
         binds = let
@@ -152,15 +162,15 @@ in {
 
           "Ctrl+Alt+Q".close-window = {};
 
-          "Alt+J".focus-column-left = {};
+          "Alt+H".focus-column-left = {};
           "Alt+L".focus-column-right = {};
-          "Alt+I".focus-window-up = {};
-          "Alt+K".focus-window-down = {};
+          "Alt+K".focus-window-up = {};
+          "Alt+J".focus-window-down = {};
 
-          "Alt+Shift+J".move-column-left = {};
+          "Alt+Shift+H".move-column-left = {};
           "Alt+Shift+L".move-column-right = {};
-          "Alt+Shift+I".move-window-up = {};
-          "Alt+Shift+K".move-window-down = {};
+          "Alt+Shift+K".move-window-up = {};
+          "Alt+Shift+J".move-window-down = {};
 
           "Alt+1".focus-workspace = "1";
           "Alt+2".focus-workspace = "2";
@@ -206,8 +216,8 @@ in {
 
           "XF86AudioRaiseVolume".spawn-sh = "${getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 0.1+";
           "XF86AudioLowerVolume".spawn-sh = "${getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 0.1-";
-          "XF86AudioMute".spawn-sh        = "${getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SINK@ toggle";
-          "XF86AudioMicMute".spawn-sh     = "${getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+          "XF86AudioMute".spawn-sh = "${getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SINK@ toggle";
+          "XF86AudioMicMute".spawn-sh = "${getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
 
           "Alt+X".screenshot = {};
           "Alt+Shift+X".screenshot-screen = {};
