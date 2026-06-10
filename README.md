@@ -26,6 +26,28 @@ nixos-install --root /mnt --flake .#gentuwu
 
 > **Warning:** This will wipe `/dev/nvme0n1` completely.
 
+### Laptop
+
+Same steps, but use the `gentuwu-laptop` host and make sure 16G of swap is available (the disko config expects this):
+
+```bash
+git clone https://github.com/LazyBev/nixos-cfg /home/nixos/nixos-cfg
+cd /home/nixos/nixos-cfg
+```
+
+Then wipe and install:
+
+```bash
+wipefs -a /dev/nvme0n1 && \
+sgdisk --zap-all /dev/nvme0n1 && \
+partprobe /dev/nvme0n1 && sleep 2 && \
+wipefs -a /dev/nvme0n1p* 2>/dev/null; \
+nix --experimental-features "nix-command flakes" run github:nix-community/disko -- \
+  --mode disko \
+  --flake .#gentuwu-laptop && \
+nixos-install --root /mnt --flake .#gentuwu-laptop
+```
+
 The wipe step is necessary even on a "fresh" install if the disk was previously partitioned — leftover filesystem signatures will cause disko to skip formatting. `wipefs -a /dev/nvme0n1p*` clears those after the partition table is gone.
 
 ---
