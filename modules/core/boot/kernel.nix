@@ -1,14 +1,9 @@
-{ pkgs, ... }: let
-  borePatch = pkgs.fetchpatch {
-    url = "https://raw.githubusercontent.com/firelzrd/bore-scheduler/main/patches/stable/linux-6.18-bore/0001-linux6.18.22-bore-6.6.3.patch";
-    hash = "sha256-beFQ06RD3q6ZkUh2ocRF98y66DmSgyQUbjWCGrsBQyU=";
+{ inputs, pkgs, lib, ... }: {
+  nixpkgs.overlays = [ inputs.cachyos-kernel.overlays.pinned ];
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore;
+
+  nix.settings = {
+    substituters = [ "https://attic.xuyh0120.win/lantian" ];
+    trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
   };
-in {
-  boot.kernelPatches = [{
-    name = "bore-scheduler";
-    patch = borePatch;
-    extraConfig = ''
-      SCHED_CLASS_EXT y
-    '';
-  }];
 }
