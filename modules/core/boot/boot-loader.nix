@@ -10,6 +10,7 @@
       "udev.log_priority=3"
       "nowatchdog"
       "nmi_watchdog=0"
+      "preempt=full"
     ];
   };
 }
