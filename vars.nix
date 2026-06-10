@@ -17,4 +17,5 @@
   font = "Pragmasevka Nerd Font";
   terminal = "foot";
   qtTheme = "adwaita-dark";
+  secondaryTheme = "caelus-custom";
 }
