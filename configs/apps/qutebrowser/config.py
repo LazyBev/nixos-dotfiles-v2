@@ -1,5 +1,8 @@
 config.load_autoconfig()
 
+# =============================================================================
+# Theme
+# =============================================================================
 Dracula = {
     "bg": "#282a36",
     "current": "#44475a",
@@ -14,6 +17,9 @@ Dracula = {
     "yellow": "#f1fa8c",
 }
 
+# =============================================================================
+# Colors
+# =============================================================================
 c.colors.tabs.selected.even.bg = Dracula["purple"]
 c.colors.tabs.selected.even.fg = Dracula["bg"]
 c.colors.tabs.selected.odd.bg = Dracula["purple"]
@@ -21,7 +27,6 @@ c.colors.tabs.selected.odd.fg = Dracula["bg"]
 c.colors.tabs.indicator.start = Dracula["cyan"]
 c.colors.tabs.indicator.stop = Dracula["purple"]
 c.colors.tabs.indicator.error = Dracula["red"]
-
 c.colors.statusbar.normal.bg = Dracula["bg"]
 c.colors.statusbar.normal.fg = Dracula["fg"]
 c.colors.statusbar.insert.bg = Dracula["current"]
@@ -39,12 +44,10 @@ c.colors.statusbar.url.hover.fg = Dracula["purple"]
 c.colors.statusbar.url.success.http.fg = Dracula["orange"]
 c.colors.statusbar.url.success.https.fg = Dracula["green"]
 c.colors.statusbar.url.warn.fg = Dracula["yellow"]
-
 c.colors.prompts.bg = Dracula["bg"]
 c.colors.prompts.fg = Dracula["fg"]
 c.colors.prompts.border = f"1px solid {Dracula['current']}"
 c.colors.prompts.selected.bg = Dracula["purple"]
-
 c.colors.completion.category.bg = Dracula["bg"]
 c.colors.completion.category.fg = Dracula["purple"]
 c.colors.completion.category.border.top = Dracula["current"]
@@ -58,7 +61,6 @@ c.colors.completion.fg = Dracula["fg"]
 c.colors.completion.match.fg = Dracula["purple"]
 c.colors.completion.scrollbar.bg = Dracula["bg"]
 c.colors.completion.scrollbar.fg = Dracula["fg"]
-
 c.colors.downloads.bar.bg = Dracula["bg"]
 c.colors.downloads.start.bg = Dracula["bg"]
 c.colors.downloads.start.fg = Dracula["fg"]
@@ -66,15 +68,12 @@ c.colors.downloads.stop.bg = Dracula["purple"]
 c.colors.downloads.stop.fg = Dracula["bg"]
 c.colors.downloads.error.bg = Dracula["red"]
 c.colors.downloads.error.fg = Dracula["fg"]
-
 c.colors.hints.fg = Dracula["bg"]
 c.colors.hints.bg = Dracula["purple"]
 c.colors.hints.match.fg = Dracula["fg"]
-
 c.colors.keyhint.fg = Dracula["fg"]
 c.colors.keyhint.suffix.fg = Dracula["fg"]
 c.colors.keyhint.bg = Dracula["bg"]
-
 c.colors.messages.error.bg = Dracula["red"]
 c.colors.messages.error.fg = Dracula["fg"]
 c.colors.messages.error.border = Dracula["red"]
@@ -84,20 +83,17 @@ c.colors.messages.warning.border = Dracula["yellow"]
 c.colors.messages.info.bg = Dracula["bg"]
 c.colors.messages.info.fg = Dracula["fg"]
 c.colors.messages.info.border = Dracula["current"]
-
 c.colors.webpage.preferred_color_scheme = "dark"
 
-c.aliases = {
-    "q": "close",
-    "qa": "quit",
-    "w": "session-save",
-    "wq": "quit --save",
-    "e": "open editor",
-    "h": "back",
-    "l": "forward",
-}
+# =============================================================================
+# Dark mode
+# =============================================================================
+c.colors.webpage.darkmode.enabled = True
+c.colors.webpage.darkmode.policy.images = "never"
 
+# =============================================================================
 # Fonts
+# =============================================================================
 c.fonts.default_family = "Pragmasevka Nerd Font"
 c.fonts.default_size = "11pt"
 c.fonts.tabs.selected = "11pt Pragmasevka Nerd Font"
@@ -109,9 +105,12 @@ c.fonts.keyhint = "11pt Pragmasevka Nerd Font"
 c.fonts.completion.entry = "11pt Pragmasevka Nerd Font"
 c.fonts.completion.category = "11pt Pragmasevka Nerd Font"
 
-# URLs
+# =============================================================================
+# URLs & Search
+# =============================================================================
 c.url.default_page = "about:blank"
 c.url.start_pages = ["about:blank"]
+c.url.auto_search = "naive"
 c.url.searchengines = {
     "DEFAULT": "http://localhost:8080/search?q={}",
     "!a": "https://wiki.archlinux.org/?search={}",
@@ -127,9 +126,10 @@ c.url.searchengines = {
     "!m": "https://www.google.com/maps?q={}",
     "!so": "https://stackoverflow.com/search?q={}",
 }
-c.url.auto_search = "never"
 
+# =============================================================================
 # Tabs
+# =============================================================================
 c.tabs.position = "top"
 c.tabs.show = "multiple"
 c.tabs.indicator.width = 3
@@ -139,24 +139,33 @@ c.tabs.mousewheel_switching = False
 c.tabs.new_position.related = "next"
 c.tabs.new_position.unrelated = "last"
 
+# =============================================================================
 # Statusbar
+# =============================================================================
 c.statusbar.show = "in-mode"
 c.statusbar.padding = {"top": 4, "bottom": 4, "left": 6, "right": 6}
 
+# =============================================================================
 # Downloads
+# =============================================================================
 c.downloads.position = "bottom"
 c.downloads.remove_finished = 5000
 
+# =============================================================================
 # Scrolling
+# =============================================================================
 c.scrolling.smooth = True
 c.scrolling.bar = "always"
 
+# =============================================================================
 # Completion
+# =============================================================================
 c.completion.height = "35%"
 c.completion.show = "always"
 
-
-# Content / Privacy
+# =============================================================================
+# Content & Privacy
+# =============================================================================
 c.content.autoplay = False
 c.content.notifications.enabled = False
 c.content.geolocation = False
@@ -170,94 +179,88 @@ c.content.blocking.adblock.lists = [
     "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/quick-fixes.txt",
     "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/unbreak.txt",
 ]
-c.content.headers.user_agent = "Mozilla/5.0 (X11; Linux x86_64; rv:136.0) Gecko/20100101 Firefox/136.0"
+c.content.headers.user_agent = (
+    "Mozilla/5.0 (X11; Linux x86_64; rv:136.0) Gecko/20100101 Firefox/136.0"
+)
 c.content.headers.accept_language = "en-US,en;q=0.9"
+c.content.javascript.log_message.levels = {"userscript:_qute_js": ["error"]}
 
-
+# =============================================================================
 # Zoom
+# =============================================================================
 c.zoom.default = "100%"
 c.zoom.mouse_divider = 512
 
+# =============================================================================
 # Editor
+# =============================================================================
 c.editor.command = ["foot", "-e", "nvim", "{file}", "-c", "normal {line}G{column}l"]
 
+# =============================================================================
 # Hints
+# =============================================================================
 c.hints.auto_follow = "unique-match"
 c.hints.border = "1px solid #44475a"
 c.hints.uppercase = True
 c.hints.scatter = True
 
+# =============================================================================
 # Input
+# =============================================================================
 c.input.insert_mode.auto_load = False
 c.input.insert_mode.auto_leave = True
 c.input.partial_timeout = 5000
 
-# Confirm on quit
+# =============================================================================
+# Session
+# =============================================================================
 c.confirm_quit = ["downloads"]
-
-# Auto-save
 c.auto_save.session = True
-
-# Sessions
 c.session.default_name = "default"
 
-config.bind("J", "tab-prev")
-config.bind("K", "tab-next")
+# =============================================================================
+# Aliases
+# =============================================================================
+c.aliases = {
+    "q": "close",
+    "qa": "quit",
+    "w": "session-save",
+    "wq": "quit --save",
+    "e": "open editor",
+    "h": "back",
+    "l": "forward",
+}
 
+# =============================================================================
+# Keybinds
+# =============================================================================
+
+# Navigation
 config.bind("H", "back")
 config.bind("L", "forward")
-
-config.bind("d", "tab-close")
-config.bind("D", "undo")
-
-config.bind("u", "undo")
-
-config.bind("f", "hint")
-config.bind("F", "hint links tab")
-
-config.bind("gi", "hint inputs --first")
-
-config.bind(";d", "hint links download --force-text")
-config.bind(";r", "hint --rapid")
-config.bind(";R", "hint --rapid --tab")
-config.bind(";y", "hint links yank")
-config.bind(";Y", "hint links yank --tab")
-
-config.bind("yf", "yank -f")
-config.bind("yt", "yank -t")
-config.bind("yd", "yank -d")
-
-config.bind("p", "open")
-config.bind("P", "open -t -- {clipboard}")
-
+config.bind("J", "tab-prev")
+config.bind("K", "tab-next")
 config.bind("r", "reload")
 config.bind("R", "reload --force")
-
 config.bind("s", "stop")
 config.bind("S", "stop")
 
-config.bind("v", "enter-mode passthrough")
-config.bind("V", "enter-mode caret")
-
-config.bind("i", "enter-mode insert")
-config.bind("I", "enter-mode insert")
-
+# Tabs
+config.bind("d", "tab-close")
+config.bind("D", "undo")
+config.bind("u", "undo")
+config.bind("t", "cmd-set-text -s :open -t")
+config.bind("T", "cmd-set-text -s :open -b")
 config.bind("o", "cmd-set-text -s :open")
 config.bind("O", "cmd-set-text -s :open -t")
-config.bind("T", "cmd-set-text -s :open -b")
-config.bind("t", "cmd-set-text -s :open -t")
 config.bind("b", "cmd-set-text -s :tab-select")
 config.bind("B", "cmd-set-text -s :quickmark-load -t")
-
+config.bind("ga", "open -t")
+config.bind("gA", "open -t -- {url:pretty}")
 config.bind("gB", "cmd-set-text -s :bookmark-load -t")
 config.bind("gl", "cmd-set-text -s :open -t -- {url:pretty}")
-
-config.bind("/", "cmd-set-text /")
-config.bind("?", "cmd-set-text ?")
-
-config.bind("n", "search-next")
-config.bind("N", "search-prev")
-
+config.bind("gt", "tab-move +")
+config.bind("gT", "tab-move -")
 config.bind("g0", "tab-focus 1")
 config.bind("g$", "tab-focus -1")
 config.bind("g1", "tab-focus 1")
@@ -270,55 +273,73 @@ config.bind("g7", "tab-focus 7")
 config.bind("g8", "tab-focus 8")
 config.bind("g9", "tab-focus 9")
 
-config.bind("gf", "view-source")
-config.bind("gF", "devtools")
+# Modes
+config.bind("i", "enter-mode insert")
+config.bind("I", "enter-mode insert")
+config.bind("v", "enter-mode passthrough")
+config.bind("V", "enter-mode caret")
+config.bind("<Escape>", "mode-leave ;; clear-messages ;; search --clear")
 
-config.bind("gt", "tab-move +")
-config.bind("gT", "tab-move -")
+# Search
+config.bind("/", "cmd-set-text /")
+config.bind("?", "cmd-set-text ?")
+config.bind("n", "search-next")
+config.bind("N", "search-prev")
 
+# Hints
+config.bind("f", "hint")
+config.bind("F", "hint links tab")
+config.bind("gi", "hint inputs --first")
+config.bind(";d", "hint links download --force-text")
+config.bind(";r", "hint --rapid")
+config.bind(";R", "hint --rapid --tab")
+config.bind(";y", "hint links yank")
+config.bind(";Y", "hint links yank --tab")
+config.bind(";v", "hint links spawn mpv {hint-url}")
+
+# Yank
+config.bind("yy", "yank")
+config.bind("yY", "yank -t")
+config.bind("yf", "yank -f")
+config.bind("yt", "yank -t")
+config.bind("yd", "yank -d")
+config.bind("yD", "yank -d")
+config.bind("yp", "yank pretty-url")
+config.bind("yP", "yank pretty-url -t")
+config.bind("yM", "yank -f")
+
+# Open / paste
+config.bind("p", "open")
+config.bind("P", "open -t -- {clipboard}")
+
+# Bookmarks & quickmarks
 config.bind("M", "bookmark-add")
 config.bind("gm", "cmd-set-text -s :quickmark-load")
 config.bind("gM", "cmd-set-text -s :bookmark-load")
 
+# Page
+config.bind("gf", "view-source")
+config.bind("gF", "devtools")
+config.bind("gK", "open qute://bindings")
 config.bind("[[", "navigate prev")
 config.bind("]]", "navigate next")
-
-config.bind("ga", "open -t")
-config.bind("gA", "open -t -- {url:pretty}")
-
-config.bind("xp", "print")
-config.bind("xf", "print --pdf")
-
-config.bind("yD", "yank -d")
-config.bind("yp", "yank pretty-url")
-config.bind("yP", "yank pretty-url -t")
-config.bind("yy", "yank")
-config.bind("yY", "yank -t")
-config.bind("yM", "yank -f")
-
-config.bind("ZZ", "quit --save")
-config.bind("ZQ", "quit")
-
 config.bind("<Ctrl+a>", "navigate increment")
 config.bind("<Ctrl+x>", "navigate decrement")
 
+# Misc
+config.bind("xp", "print")
+config.bind("xf", "print --pdf")
+config.bind("ZZ", "quit --save")
+config.bind("ZQ", "quit")
 config.bind("<Ctrl+n>", "completion-item-focus --history next")
 config.bind("<Ctrl+p>", "completion-item-focus --history prev")
-
 config.bind("<Ctrl+Return>", "open -t")
 config.bind("<Ctrl+z>", "undo --window")
-
 config.bind("<Alt+Return>", "hint --tab")
 
-config.bind("<Escape>", "mode-leave ;; clear-messages ;; search --clear")
+# Media
+config.bind(
+    "gv",
+    "spawn --detach mpv {url} --ytdl-format=bestvideo[height<=1080]+bestaudio/best",
+)
 
-# Mouse
-
-config.bind("gv", "spawn --detach mpv {url} --ytdl-format=bestvideo[height<=1080]+bestaudio/best")
-config.bind(";v", "hint links spawn mpv {hint-url}")
-
-c.content.javascript.log_message.levels = {"userscript:_qute_js": ["error"]}
-
-c.url.auto_search = "naive"
-
-config.bind("gK", "open qute://bindings")
