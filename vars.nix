@@ -30,7 +30,7 @@ in
     fullname = "yari";
     email = "yari@yari.xyz";
     hostname = "gentuwu";
-    maxJobs = 6;
+    maxJobs = 4;
 
     stateVersion = "26.05";
     keyboardLayout = "gb";
