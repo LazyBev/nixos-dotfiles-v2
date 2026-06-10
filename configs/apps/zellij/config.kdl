@@ -53,7 +53,7 @@ keybinds clear-defaults=true {
     // --- Pane mode ---
     // (press Ctrl+p in normal mode — manage panes)
     pane {
-        bind "Escape" "Ctrl p" { SwitchToMode "Normal"; }
+        bind "Esc" "Ctrl p" { SwitchToMode "Normal"; }
         bind "h" { MoveFocus "Left"; }
         bind "l" { MoveFocus "Right"; }
         bind "j" { MoveFocus "Down"; }
@@ -73,7 +73,7 @@ keybinds clear-defaults=true {
     // --- Tab mode ---
     // (press Ctrl+t in normal mode — manage tabs)
     tab {
-        bind "Escape" "Ctrl t" { SwitchToMode "Normal"; }
+        bind "Esc" "Ctrl t" { SwitchToMode "Normal"; }
         bind "h" "Left" { GoToPreviousTab; }
         bind "l" "Right" { GoToNextTab; }
         bind "n" { NewTab; SwitchToMode "Normal"; }
@@ -96,7 +96,7 @@ keybinds clear-defaults=true {
     // --- Resize mode ---
     // (press Ctrl+n in normal mode — resize panes)
     resize {
-        bind "Escape" "Ctrl n" { SwitchToMode "Normal"; }
+        bind "Esc" "Ctrl n" { SwitchToMode "Normal"; }
         bind "h" "Left"  { Resize "Increase Left"; }
         bind "l" "Right" { Resize "Increase Right"; }
         bind "j" "Down"  { Resize "Increase Down"; }
@@ -112,7 +112,7 @@ keybinds clear-defaults=true {
     // --- Move mode ---
     // (press Ctrl+m in normal mode — move panes around)
     move {
-        bind "Escape" "Ctrl m" { SwitchToMode "Normal"; }
+        bind "Esc" "Ctrl m" { SwitchToMode "Normal"; }
         bind "h" "Left"  { MovePane "Left"; }
         bind "l" "Right" { MovePane "Right"; }
         bind "j" "Down"  { MovePane "Down"; }
@@ -123,7 +123,7 @@ keybinds clear-defaults=true {
     // --- Scroll mode ---
     // (press Ctrl+s in normal mode — scroll through pane output)
     scroll {
-        bind "Escape" "Ctrl s" { SwitchToMode "Normal"; }
+        bind "Esc" "Ctrl s" { SwitchToMode "Normal"; }
         bind "j" "Down"  { ScrollDown; }
         bind "k" "Up"    { ScrollUp; }
         bind "d" { HalfPageScrollDown; }
@@ -140,7 +140,7 @@ keybinds clear-defaults=true {
     // --- Search mode ---
     // (press / or s in scroll mode — search through scrollback)
     search {
-        bind "Escape" "Ctrl s" { SwitchToMode "Normal"; }
+        bind "Esc" "Ctrl s" { SwitchToMode "Normal"; }
         bind "n" { Search "Down"; }
         bind "N" { Search "Up"; }
         bind "c" { SearchToggleOption "CaseSensitivity"; }
@@ -151,7 +151,7 @@ keybinds clear-defaults=true {
     // --- Session mode ---
     // (press Ctrl+o in normal mode — manage sessions)
     session {
-        bind "Escape" "Ctrl o" { SwitchToMode "Normal"; }
+        bind "Esc" "Ctrl o" { SwitchToMode "Normal"; }
         bind "d" { Detach; }
         bind "w" { LaunchOrFocusPlugin "session-manager" { floating true; move_to_focused_tab true; }; SwitchToMode "Normal"; }
         bind "c" { LaunchOrFocusPlugin "configuration" { floating true; move_to_focused_tab true; }; SwitchToMode "Normal"; }
@@ -160,14 +160,14 @@ keybinds clear-defaults=true {
     // --- RenamePane mode ---
     // (press i in pane mode — rename the focused pane)
     renamePane {
-        bind "Escape" { UndoRenamePane; SwitchToMode "Pane"; }
+        bind "Esc" { UndoRenamePane; SwitchToMode "Pane"; }
         bind "Enter"  { SwitchToMode "Normal"; }
     }
 
     // --- RenameTab mode ---
     // (press i in tab mode — rename the focused tab)
     renameTab {
-        bind "Escape" { UndoRenameTab; SwitchToMode "Tab"; }
+        bind "Esc" { UndoRenameTab; SwitchToMode "Tab"; }
         bind "Enter"  { SwitchToMode "Normal"; }
     }
 }
