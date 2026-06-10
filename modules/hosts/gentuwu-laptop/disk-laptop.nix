@@ -50,6 +50,7 @@
       };
     };
 
+    hardware.enableRedistributableFirmware = true;
     nixpkgs.hostPlatform = lib.mkDefault vars.platform;
     hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
