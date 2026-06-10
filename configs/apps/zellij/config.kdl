@@ -18,6 +18,7 @@ scroll_buffer_size 10000
 copy_command "wl-copy"
 copy_on_select true
 on_force_close "detach"
+support_kitty_keyboard_protocol true
 
 // =============================================================================
 // Keybinds
