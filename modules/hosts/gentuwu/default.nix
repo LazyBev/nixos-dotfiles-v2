@@ -17,7 +17,6 @@
 in {
   flake.nixosConfigurations.gentuwu = mkGentuwu [
     self.nixosModules.common
-    inputs.omnisearch.nixosModules.default
     {gentuwu.hostType = "desktop";}
     {services.omnisearch.enable = true;}
   ];
