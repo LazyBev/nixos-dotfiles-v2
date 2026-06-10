@@ -232,7 +232,8 @@ c.aliases = {
 }
 
 # =============================================================================
-# Keybinds
+# Keybinds - Normal Mode
+# (default mode, press <Escape> from any other mode to return)
 # =============================================================================
 
 # Navigation
@@ -242,103 +243,234 @@ config.bind("J", "tab-prev")
 config.bind("K", "tab-next")
 config.bind("r", "reload")
 config.bind("R", "reload --force")
-config.bind("s", "stop")
-config.bind("S", "stop")
+config.bind("gg", "scroll-to-perc 0")
+config.bind("G", "scroll-to-perc")
+config.bind("j", "scroll down")
+config.bind("k", "scroll up")
+config.bind("h", "scroll left")
+config.bind("l", "scroll right")
+config.bind("<Ctrl+d>", "scroll-page 0 0.5")
+config.bind("<Ctrl+u>", "scroll-page 0 -0.5")
+config.bind("<Ctrl+f>", "scroll-page 0 1")
+config.bind("<Ctrl+b>", "scroll-page 0 -1")
+config.bind("[[", "navigate prev")
+config.bind("]]", "navigate next")
+config.bind("<Alt+Left>", "back")
+config.bind("<Alt+Right>", "forward")
 
 # Tabs
-config.bind("d", "tab-close")
-config.bind("D", "undo")
-config.bind("u", "undo")
-config.bind("t", "cmd-set-text -s :open -t")
-config.bind("T", "cmd-set-text -s :open -b")
+config.bind("t", "open -t")
+config.bind("T", "cmd-set-text -s :open -t")
 config.bind("o", "cmd-set-text -s :open")
 config.bind("O", "cmd-set-text -s :open -t")
-config.bind("b", "cmd-set-text -s :tab-select")
-config.bind("B", "cmd-set-text -s :quickmark-load -t")
-config.bind("ga", "open -t")
-config.bind("gA", "open -t -- {url:pretty}")
-config.bind("gB", "cmd-set-text -s :bookmark-load -t")
-config.bind("gl", "cmd-set-text -s :open -t -- {url:pretty}")
-config.bind("gt", "tab-move +")
-config.bind("gT", "tab-move -")
+config.bind("d", "tab-close")
+config.bind("u", "undo")
+config.bind("U", "undo --window")
+config.bind("<Ctrl+t>", "open -t")
+config.bind("<Ctrl+w>", "tab-close")
+config.bind("<Ctrl+Tab>", "tab-next")
+config.bind("<Ctrl+Shift+Tab>", "tab-prev")
+config.bind("<Ctrl+Shift+]>", "tab-move +")
+config.bind("<Ctrl+Shift+[>", "tab-move -")
+config.bind("1", "tab-focus 1")
+config.bind("2", "tab-focus 2")
+config.bind("3", "tab-focus 3")
+config.bind("4", "tab-focus 4")
+config.bind("5", "tab-focus 5")
+config.bind("6", "tab-focus 6")
+config.bind("7", "tab-focus 7")
+config.bind("8", "tab-focus 8")
+config.bind("9", "tab-focus 9")
 config.bind("g0", "tab-focus 1")
 config.bind("g$", "tab-focus -1")
-config.bind("g1", "tab-focus 1")
-config.bind("g2", "tab-focus 2")
-config.bind("g3", "tab-focus 3")
-config.bind("g4", "tab-focus 4")
-config.bind("g5", "tab-focus 5")
-config.bind("g6", "tab-focus 6")
-config.bind("g7", "tab-focus 7")
-config.bind("g8", "tab-focus 8")
-config.bind("g9", "tab-focus 9")
+config.bind("gp", "tab-pin")
+config.bind("gm", "tab-mute")
+config.bind("gl", "tab-move -")
+config.bind("gr", "tab-move +")
 
-# Modes
-config.bind("i", "enter-mode insert")
-config.bind("I", "enter-mode insert")
-config.bind("v", "enter-mode passthrough")
-config.bind("V", "enter-mode caret")
-config.bind("<Escape>", "mode-leave ;; clear-messages ;; search --clear")
+# Open / URL
+config.bind("p", "open -- {clipboard}")
+config.bind("P", "open -t -- {clipboard}")
+config.bind("go", "cmd-set-text :open {url:pretty}")
+config.bind("gO", "cmd-set-text :open -t {url:pretty}")
 
 # Search
 config.bind("/", "cmd-set-text /")
 config.bind("?", "cmd-set-text ?")
 config.bind("n", "search-next")
 config.bind("N", "search-prev")
+config.bind("<Escape>", "mode-leave ;; clear-messages ;; search --clear")
 
 # Hints
 config.bind("f", "hint")
 config.bind("F", "hint links tab")
-config.bind("gi", "hint inputs --first")
-config.bind(";d", "hint links download --force-text")
-config.bind(";r", "hint --rapid")
-config.bind(";R", "hint --rapid --tab")
+config.bind(";f", "hint all tab")
+config.bind(";b", "hint all tab-bg")
+config.bind(";i", "hint images")
+config.bind(";I", "hint images tab")
+config.bind(";o", "hint links fill :open {hint-url}")
+config.bind(";O", "hint links fill :open -t {hint-url}")
+config.bind(";d", "hint links download")
 config.bind(";y", "hint links yank")
-config.bind(";Y", "hint links yank --tab")
-config.bind(";v", "hint links spawn mpv {hint-url}")
+config.bind(";Y", "hint links yank-primary")
+config.bind(";v", "hint links spawn --detach mpv {hint-url}")
+config.bind(";r", "hint --rapid")
+config.bind("gi", "hint inputs --first")
 
 # Yank
 config.bind("yy", "yank")
-config.bind("yY", "yank -t")
-config.bind("yf", "yank -f")
-config.bind("yt", "yank -t")
-config.bind("yd", "yank -d")
-config.bind("yD", "yank -d")
+config.bind("yt", "yank title")
+config.bind("yu", "yank")
+config.bind("ym", "yank markdown")
 config.bind("yp", "yank pretty-url")
-config.bind("yP", "yank pretty-url -t")
-config.bind("yM", "yank -f")
+config.bind("yd", "yank domain")
 
-# Open / paste
-config.bind("p", "open")
-config.bind("P", "open -t -- {clipboard}")
+# Marks / jumps
+config.bind("'", "mode-enter jump_mark")
+config.bind("`", "mode-enter jump_mark")
+config.bind("m", "mode-enter set_mark")
 
-# Bookmarks & quickmarks
-config.bind("M", "bookmark-add")
-config.bind("gm", "cmd-set-text -s :quickmark-load")
-config.bind("gM", "cmd-set-text -s :bookmark-load")
+# Zoom
+config.bind("+", "zoom-in")
+config.bind("-", "zoom-out")
+config.bind("=", "zoom")
+config.bind("<Ctrl+=>", "zoom-in")
+config.bind("<Ctrl+->", "zoom-out")
+config.bind("<Ctrl+0>", "zoom")
 
-# Page
+# Page actions
 config.bind("gf", "view-source")
 config.bind("gF", "devtools")
-config.bind("gK", "open qute://bindings")
-config.bind("[[", "navigate prev")
-config.bind("]]", "navigate next")
-config.bind("<Ctrl+a>", "navigate increment")
-config.bind("<Ctrl+x>", "navigate decrement")
+config.bind("gd", "devtools")
+config.bind(":", "cmd-set-text :")
+config.bind(".", "repeat-command")
 
-# Misc
-config.bind("xp", "print")
-config.bind("xf", "print --pdf")
-config.bind("ZZ", "quit --save")
-config.bind("ZQ", "quit")
-config.bind("<Ctrl+n>", "completion-item-focus --history next")
-config.bind("<Ctrl+p>", "completion-item-focus --history prev")
-config.bind("<Ctrl+Return>", "open -t")
-config.bind("<Ctrl+z>", "undo --window")
-config.bind("<Alt+Return>", "hint --tab")
+# Downloads
+config.bind("gD", "download")
+config.bind("cd", "download-cancel")
+
+# Bookmarks & quickmarks
+config.bind("B", "cmd-set-text -s :bookmark-load -t")
+config.bind("b", "cmd-set-text -s :bookmark-load")
+config.bind("M", "bookmark-add")
+config.bind(",m", "cmd-set-text -s :quickmark-load")
+config.bind(",M", "cmd-set-text -s :quickmark-load -t")
+config.bind(",s", "quickmark-save")
+
+# Modes
+config.bind("i", "enter-mode insert")
+config.bind("v", "enter-mode caret")
+config.bind("V", "enter-mode passthrough")
+
+# Adblock
+config.bind(",au", "adblock-update")
+
+# Print / save
+config.bind(",p", "print")
+config.bind(",P", "print --pdf")
+
+# History / internal pages
+config.bind("gh", "open qute://history")
+config.bind("gs", "open qute://settings")
+config.bind("gk", "open qute://bindings")
+config.bind("gH", "open -t qute://history")
 
 # Media
 config.bind(
     "gv",
     "spawn --detach mpv {url} --ytdl-format=bestvideo[height<=1080]+bestaudio/best",
 )
+
+# Kill overlays (cookie banners etc)
+config.bind(
+    ",ko",
+    "jseval (function () { var i, elements = document.querySelectorAll('body *'); for (i = 0; i < elements.length; i++) { var pos = getComputedStyle(elements[i]).position; if (pos === 'fixed' || pos == 'sticky') { elements[i].parentNode.removeChild(elements[i]); } } })();",
+)
+
+# Quit
+config.bind("ZZ", "quit --save")
+config.bind("ZQ", "quit")
+config.bind("<Ctrl+q>", "quit")
+
+# Misc
+config.bind("<Ctrl+Return>", "open -t")
+config.bind("<Alt+Return>", "hint --tab")
+config.bind("<Ctrl+n>", "completion-item-focus --history next")
+config.bind("<Ctrl+p>", "completion-item-focus --history prev")
+
+# =============================================================================
+# Keybinds - Insert Mode
+# (press i in normal mode, or click a text field — lets you type on the page)
+# =============================================================================
+config.bind("<Escape>", "mode-leave", mode="insert")
+config.bind("<Ctrl+e>", "open-editor", mode="insert")
+config.bind("<Ctrl+v>", "insert-text -- {clipboard}", mode="insert")
+
+# =============================================================================
+# Keybinds - Caret Mode
+# (press v in normal mode — vim-style text selection with the keyboard)
+# =============================================================================
+config.bind("v", "toggle-selection", mode="caret")
+config.bind("V", "toggle-selection --line", mode="caret")
+config.bind("y", "yank selection", mode="caret")
+config.bind("q", "mode-leave", mode="caret")
+config.bind("<Escape>", "mode-leave", mode="caret")
+config.bind("h", "move-to-prev-char", mode="caret")
+config.bind("l", "move-to-next-char", mode="caret")
+config.bind("j", "move-to-next-line", mode="caret")
+config.bind("k", "move-to-prev-line", mode="caret")
+config.bind("w", "move-to-next-word", mode="caret")
+config.bind("b", "move-to-prev-word", mode="caret")
+config.bind("e", "move-to-end-of-word", mode="caret")
+config.bind("0", "move-to-start-of-line", mode="caret")
+config.bind("$", "move-to-end-of-line", mode="caret")
+config.bind("gg", "move-to-start-of-document", mode="caret")
+config.bind("G", "move-to-end-of-document", mode="caret")
+config.bind("<Ctrl+d>", "scroll-page 0 0.5", mode="caret")
+config.bind("<Ctrl+u>", "scroll-page 0 -0.5", mode="caret")
+
+# =============================================================================
+# Keybinds - Passthrough Mode
+# (press V in normal mode — all keypresses go straight to the page, nothing intercepted)
+# =============================================================================
+config.bind("<Escape>", "mode-leave", mode="passthrough")
+
+# =============================================================================
+# Keybinds - Hint Mode
+# (press f or F in normal mode — labels appear on links for keyboard navigation)
+# =============================================================================
+config.bind("<Escape>", "mode-leave", mode="hint")
+config.bind("<Ctrl+c>", "mode-leave", mode="hint")
+
+# =============================================================================
+# Keybinds - Command Mode
+# (press : in normal mode — type qutebrowser commands directly)
+# =============================================================================
+config.bind("<Ctrl+c>", "mode-leave", mode="command")
+config.bind("<Escape>", "mode-leave", mode="command")
+config.bind("<Ctrl+n>", "completion-item-focus --history next", mode="command")
+config.bind("<Ctrl+p>", "completion-item-focus --history prev", mode="command")
+config.bind("<Tab>", "completion-item-focus next", mode="command")
+config.bind("<Shift+Tab>", "completion-item-focus prev", mode="command")
+config.bind("<Up>", "completion-item-focus --history prev", mode="command")
+config.bind("<Down>", "completion-item-focus --history next", mode="command")
+config.bind("<Ctrl+d>", "completion-item-del", mode="command")
+
+# =============================================================================
+# Keybinds - Prompt Mode
+# (appears automatically for download location prompts or JS dialogs)
+# =============================================================================
+config.bind("<Escape>", "mode-leave", mode="prompt")
+config.bind("<Return>", "prompt-accept", mode="prompt")
+config.bind("<Ctrl+y>", "prompt-accept yes", mode="prompt")
+config.bind("<Ctrl+n>", "prompt-accept no", mode="prompt")
+config.bind("<Tab>", "prompt-item-focus next", mode="prompt")
+config.bind("<Shift+Tab>", "prompt-item-focus prev", mode="prompt")
+
+# =============================================================================
+# Keybinds - Yesno Mode
+# (appears automatically when qutebrowser asks a yes/no question)
+# =============================================================================
+config.bind("y", "prompt-accept yes", mode="yesno")
+config.bind("n", "prompt-accept no", mode="yesno")
+config.bind("<Escape>", "mode-leave", mode="yesno")

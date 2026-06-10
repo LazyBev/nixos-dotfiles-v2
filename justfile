@@ -1,7 +1,7 @@
 check:
 	nix flake check
 
-update:
+flakeupd:
 	nix flake update
 
 upgrade:
