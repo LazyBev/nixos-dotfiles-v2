@@ -25,7 +25,6 @@
 
       # gui
       fuzzel
-      searxng
       vscodium
       thunar
       thunar-archive-plugin
