@@ -50,6 +50,7 @@
       ocamlPackages.ocaml-lsp
       devenv
       opam
+      wl-clipboard
 
       # virt
       qemu
