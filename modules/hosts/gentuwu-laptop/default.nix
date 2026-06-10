@@ -18,6 +18,5 @@ in {
   flake.nixosConfigurations.gentuwu-laptop = mkGentuwuLaptop [
     self.nixosModules.common
     {gentuwu.hostType = "laptop";}
-    {services.omnisearch.enable = true;}
   ];
 }

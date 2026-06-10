@@ -1,4 +1,3 @@
-
 check:
 	nix flake check
 
@@ -6,10 +5,10 @@ update:
 	nix flake update
 
 upgrade:
-	doas nixos-rebuild switch --flake .#gentuwu -j$(nproc)
+	doas nixos-rebuild switch --flake .#gentuwu -j$(( $(nproc) / 2 ))
 
 upgrade-laptop:
-	doas nixos-rebuild switch --flake .#gentuwu-laptop -j$(nproc)
+	doas nixos-rebuild switch --flake .#gentuwu-laptop -j$(( $(nproc) / 2 ))
 
 gc:
 	doas nix-collect-garbage --delete-older-than 30d
@@ -24,10 +23,10 @@ clean:
 	nix-collect-garbage -d
 
 sysupd:
-	nix flake update && doas nixos-rebuild switch --flake .#gentuwu -j$(nproc)
+	nix flake update && doas nixos-rebuild switch --flake .#gentuwu -j$(( $(nproc) / 2 ))
 
 sysupd-laptop:
-	nix flake update && doas nixos-rebuild switch --flake .#gentuwu-laptop -j$(nproc)
+	nix flake update && doas nixos-rebuild switch --flake .#gentuwu-laptop -j$(( $(nproc) / 2 ))
 
 devenv-shell:
 	devenv shell
@@ -45,4 +44,4 @@ search query:
 	nix search nixpkgs {{query}}
 
 search-options query:
-	nix-instantiate --eval -E "(import <nixpkgs/nixos> {}).options" | grep -i {{query}}
+	nix-instantiate --eval -E "(import <nixpkgs/nixos> {}).options" | grep -i {{query}}nix-instantiate --eval -E "(import <nixpkgs/nixos> {}).options" | grep -i {{query}}
