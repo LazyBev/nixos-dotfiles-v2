@@ -212,6 +212,8 @@ in {
           "Alt+BracketRight".consume-or-expel-window-right = {};
 
           "Alt+Tab".toggle-window-floating = {};
+          "Alt+Ctrl+Tab".focus-floating = {};
+          "Alt+Space".focus-tiling = {};
           "Alt+W".switch-preset-column-width = {};
           "Alt+F".fullscreen-window = {};
 
