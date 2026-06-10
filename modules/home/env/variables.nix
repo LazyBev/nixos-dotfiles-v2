@@ -1,19 +1,19 @@
-{ ... }: {
+{ vars, ... }: {
   environment = {
     variables = {
-      GTK_THEME = "Dracula";
-      XCURSOR_THEME = "catppuccin-mocha-mauve-cursors";
-      XCURSOR_SIZE = "24";
+      GTK_THEME = vars.theme;
+      XCURSOR_THEME = vars.cursorTheme;
+      XCURSOR_SIZE = toString vars.cursorSize;
     };
 
     sessionVariables = {
-      GTK_THEME = "Dracula";
-      QT_STYLE_OVERRIDE = "adwaita-dark";
+      GTK_THEME = vars.theme;
+      QT_STYLE_OVERRIDE = vars.qtTheme;
       QT_QPA_PLATFORMTHEME = "gtk3";
       ADW_DISABLE_PORTAL = "1";
-      TERMINAL = "foot";
+      TERMINAL = vars.terminal;
     };
   };
 
-  xdg.mime.defaultApplications."x-scheme-handler/terminal" = "foot.desktop";
+  xdg.mime.defaultApplications."x-scheme-handler/terminal" = "${vars.terminal}.desktop";
 }

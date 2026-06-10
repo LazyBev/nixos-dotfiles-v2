@@ -1,16 +1,18 @@
-{ pkgs, ... }: {
+let
+  vars = import ../../../vars.nix;
+in { pkgs, ... }: {
   gtk = {
     enable = true;
     theme = {
-      name = "Dracula";
+      name = vars.theme;
       package = pkgs.dracula-theme;
     };
     iconTheme = {
-      name = "Dracula";
+      name = vars.theme;
       package = pkgs.dracula-icon-theme;
     };
     font = {
-      name = "Pragmasevka Nerd Font";
+      name = vars.font;
       size = 10;
     };
     gtk2.force = true;
@@ -22,17 +24,17 @@
     enable = true;
     platformTheme.name = "gtk";
     style = {
-      name = "adwaita-dark";
+      name = vars.qtTheme;
       package = pkgs.adwaita-qt;
     };
   };
 
   dconf.settings."org/gnome/desktop/interface" = {
     color-scheme = "prefer-dark";
-    gtk-theme = "Dracula";
-    icon-theme = "Dracula";
-    cursor-theme = "catppuccin-mocha-mauve-cursors";
-    cursor-size = 24;
-    font-name = "Pragmasevka Nerd Font 10";
+    gtk-theme = vars.theme;
+    icon-theme = vars.theme;
+    cursor-theme = vars.cursorTheme;
+    cursor-size = vars.cursorSize;
+    font-name = "${vars.font} 10";
   };
 }

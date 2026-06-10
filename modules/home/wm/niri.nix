@@ -1,4 +1,5 @@
 {inputs, ...}: let
+  vars = import ../../../vars.nix;
   inherit (inputs.wrapper-modules.wrappers) niri noctalia-shell;
   inherit (builtins) fromJSON readFile;
 in {
@@ -18,7 +19,7 @@ in {
       settings = {
         input = {
           keyboard.xkb = {
-            layout = "gb";
+            layout = vars.keyboardLayout;
             options = "numpad:mac";
           };
           touchpad = {
@@ -131,8 +132,8 @@ in {
           CLUTTER_BACKEND = "wayland";
           _JAVA_AWT_WM_NONREPARENTING = "1";
           XDG_DESKTOP_PORTAL = "xdg-desktop-portal";
-          XCURSOR_THEME = "catppuccin-mocha-mauve-cursors";
-          XCURSOR_SIZE = "24";
+          XCURSOR_THEME = vars.cursorTheme;
+          XCURSOR_SIZE = toString vars.cursorSize;
           WLR_NO_HARDWARE_CURSORS = "1";
         };
 
@@ -218,7 +219,7 @@ in {
           "Alt+F".fullscreen-window = {};
 
           "Alt+Shift+Backspace".quit = {};
-          "Mod+Shift+L".spawn-sh = "${getExe pkgs.gtklock} -s /home/yari/.config/gtklock/style.css -b /home/yari/Pictures/matikanefuku.png";
+          "Mod+Shift+L".spawn-sh = "${getExe pkgs.gtklock} -s /home/${vars.username}/.config/gtklock/style.css -b /home/${vars.username}/Pictures/matikanefuku.png";
           "Alt+Ctrl+P".spawn-sh = "${getExe pkgs.doas} reboot";
           "Alt+Shift+P".spawn-sh = "${getExe pkgs.doas} poweroff";
 

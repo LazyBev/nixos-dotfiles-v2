@@ -1,4 +1,5 @@
 { vars, ... }: {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  system.stateVersion = "26.05";
+  nix.settings.max-jobs = vars.maxJobs;
+  system.stateVersion = vars.stateVersion;
 }

@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: {
+{ inputs, pkgs, vars, ... }: {
   imports = [ inputs.nix-flatpak.nixosModules.nix-flatpak ];
   services.flatpak = {
     enable = true;
@@ -16,7 +16,7 @@
     overrides = {
       global = {
         Environment = {
-          GTK_THEME = "Dracula";
+          GTK_THEME = vars.theme;
         };
       };
     };

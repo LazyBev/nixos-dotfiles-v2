@@ -20,7 +20,7 @@ in {
 
         home.username = vars.username;
         home.homeDirectory = "/home/${vars.username}";
-        home.stateVersion = "26.05";
+        home.stateVersion = vars.stateVersion;
 
         programs.home-manager.enable = true;
 

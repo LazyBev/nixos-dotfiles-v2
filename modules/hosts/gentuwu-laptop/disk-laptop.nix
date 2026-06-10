@@ -1,4 +1,4 @@
-{ inputs, config, lib, ... }: {
+{ inputs, config, lib, vars, ... }: {
   imports = [ inputs.disko.nixosModules.disko ];
 
   options.gentuwu.laptopHardware.enable = lib.mkEnableOption "gentuwu laptop hardware configuration";
@@ -50,7 +50,7 @@
       };
     };
 
-    nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+    nixpkgs.hostPlatform = lib.mkDefault vars.platform;
     hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
     services.upower.enable = true;

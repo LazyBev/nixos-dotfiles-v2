@@ -1,15 +1,15 @@
-{ inputs, pkgs, ... }: {
+{ inputs, pkgs, vars, ... }: {
   services.xserver.enable = true;
   services.displayManager.sddm = {
     enable = true;
     theme = "catppuccin-mocha-mauve";
     settings = {
       Theme = {
-        Font = "Pragmasevka Nerd Font";
+        Font = vars.font;
       };
       Cursor = {
-        Theme = "catppuccin-mocha-mauve-cursors";
-        Size = 24;
+        Theme = vars.cursorTheme;
+        Size = vars.cursorSize;
       };
     };
   };

@@ -1,4 +1,4 @@
-{ inputs, config, lib, ... }: {
+{ inputs, config, lib, vars, ... }: {
   imports = [ inputs.disko.nixosModules.disko ];
 
   options.gentuwu.desktopHardware.enable = lib.mkEnableOption "gentuwu desktop hardware configuration";
@@ -51,7 +51,7 @@
     };
 
     hardware.enableRedistributableFirmware = true;
-    nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+    nixpkgs.hostPlatform = lib.mkDefault vars.platform;
     hardware.cpu.amd.updateMicrocode = true;
   };
 }
