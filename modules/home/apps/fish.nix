@@ -33,6 +33,7 @@ in { ... }: {
       av1 = "ffmpeg -c:v libsvtav1 -crf 35 -preset 8 -c:a libopus";
       prores = "ffmpeg -c:v prores_ks -profile:v 3 -vendor apl0 -c:a pcm_s16le";
       define = "curl -s \"dict://dict.org/d:\"";
+      ptndwrk = "rust-stakeholder -d fullstack -j extreme -c extreme -a -t";
     };
 
     shellAbbrs = {

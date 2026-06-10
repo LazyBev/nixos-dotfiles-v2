@@ -52,6 +52,7 @@ in {
       devenv
       opam
       wl-clipboard
+      rust-stakeholder
 
       # virt
       qemu
