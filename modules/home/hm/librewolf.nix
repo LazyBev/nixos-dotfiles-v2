@@ -10,6 +10,7 @@ in {
       "privacy.clearOnShutdown.cookies" = false;
       "network.cookie.lifetimePolicy" = 0;
       "browser.fullscreen.autohide" = false;
+      "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
     };
     profiles.default = {
       id = 0;
