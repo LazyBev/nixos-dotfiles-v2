@@ -1,5 +1,5 @@
 { pkgs, ... }: let
-  userChrome = builtins.readFile ./userChrome.css;
+  userChrome = builtins.readFile ../../../configs/apps/librewolf/userChrome.css;
 in {
   programs.librewolf = {
     enable = true;
@@ -18,9 +18,5 @@ in {
       isDefault = true;
       userChrome = userChrome;
     };
-  };
-
-  home.file.".config/librewolf/sidebery-sidebar.css" = {
-    source = ./sidebery-sidebar.css;
   };
 }

@@ -7,6 +7,7 @@
   xdg.configFile."yazi/flavors/dracula.yazi/flavor.toml".source = ../../../configs/apps/yazi/flavors/dracula.yazi/flavor.toml;
   xdg.configFile."yazi/flavors/dracula.yazi/tmtheme.xml".source = ../../../configs/apps/yazi/flavors/dracula.yazi/tmtheme.xml;
   xdg.configFile."qutebrowser/config.py".source = ../../../configs/apps/qutebrowser/config.py;
+  xdg.configFile."librewolf/sidebery-sidebar.css".source = ../../../configs/apps/librewolf/sidebery-sidebar.css;
   xdg.configFile."gtklock/style.css".source = ../../../configs/apps/gtklock/style.css;
   xdg.configFile."xdg-desktop-portal/portals.conf".text = ''[preferred] default=gtk'';
   xdg.configFile."zellij/config.kdl".source = ../../../configs/apps/zellij/config.kdl;
