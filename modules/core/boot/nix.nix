@@ -2,7 +2,7 @@
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     max-jobs = vars.maxJobs;
-    parallel-downloads = 5;
+    max-substitution-jobs = 5;
     substituters = [
       "https://cache.nixos.org"
       "https://nix-community.cachix.org"
