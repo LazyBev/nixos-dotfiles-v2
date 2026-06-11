@@ -6,7 +6,7 @@
   config = lib.mkIf config.gentuwu.laptopHardware.enable {
     boot.initrd.availableKernelModules = [ "vmd" "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
     boot.initrd.kernelModules = [ ];
-    boot.kernelModules = [ "kvm-intel" "rtw88_8822ce" ];
+    boot.kernelModules = [ "kvm-intel" ];
     boot.extraModulePackages = [ ];
 
     disko.devices.disk.nvme0n1 = {

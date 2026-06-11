@@ -10,4 +10,14 @@
   xdg.configFile."gtklock/style.css".source = ../../../configs/apps/gtklock/style.css;
   xdg.configFile."xdg-desktop-portal/portals.conf".text = ''[preferred] default=gtk'';
   xdg.configFile."zellij/config.kdl".source = ../../../configs/apps/zellij/config.kdl;
+
+  xdg.configFile."foot/foot.ini".source = ../../../configs/apps/foot/foot.ini;
+
+  xdg.configFile."fcitx5/config".source = ../../../configs/apps/fcitx5/config;
+  xdg.configFile."fcitx5/profile".source = ../../../configs/apps/fcitx5/profile;
+  xdg.configFile."fcitx5/conf/punctuation.conf".source = ../../../configs/apps/fcitx5/conf/punctuation.conf;
+  xdg.configFile."fcitx5/conf/spell.conf".source = ../../../configs/apps/fcitx5/conf/spell.conf;
+  xdg.configFile."fcitx5/conf/keyboard.conf".source = ../../../configs/apps/fcitx5/conf/keyboard.conf;
+  xdg.configFile."fcitx5/conf/notifications.conf".source = ../../../configs/apps/fcitx5/conf/notifications.conf;
+  xdg.configFile."fcitx5/conf/chttrans.conf".source = ../../../configs/apps/fcitx5/conf/chttrans.conf;
 }

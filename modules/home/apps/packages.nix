@@ -20,8 +20,6 @@ in {
       cava
       zellij
       lazygit
-      links2
-      browsh
       gh
       pay-respects
 
@@ -35,8 +33,8 @@ in {
       networkmanagerapplet
       gtklock
       qutebrowser
-      tor-browser
       steam
+      tor-browser
       gajim
       proton-vpn
       protonmail-desktop
@@ -44,19 +42,11 @@ in {
       # dev
       tinycc
       opencode
-      ollama
-      ocamlPackages.ocaml
-      ocamlPackages.dune_3
-      ocamlPackages.findlib
-      ocamlPackages.ocaml-lsp
-      devenv
-      opam
-      wl-clipboard
       rust-stakeholder
+      wl-clipboard
 
       # virt
       qemu
-      qemu_full
 
       # media
       poppler

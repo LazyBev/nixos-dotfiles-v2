@@ -6,9 +6,9 @@
     eza bat zoxide
     fastfetch file
     p7zip unzip unar
-    e2fsprogs dosfstools grub2
+    e2fsprogs dosfstools
     just dysk
-    gh lazygit
+    gh
     ffmpeg
     tealdeer
     devenv
