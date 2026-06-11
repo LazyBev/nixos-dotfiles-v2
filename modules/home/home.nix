@@ -12,6 +12,7 @@ in {
           ./hm/user-dirs.nix
           ./hm/bat.nix
           ./hm/fzf.nix
+          ./hm/librewolf.nix
           ./hm/theme.nix
           ./hm/vesktop.nix
           ./hm/xdg-config-files.nix
