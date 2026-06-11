@@ -46,4 +46,12 @@ in {
     cursor-size = vars.cursorSize;
     font-name = "${vars.font} 10";
   };
+
+  home.pointerCursor = {
+    name = vars.cursorTheme;
+    size = vars.cursorSize;
+    package = pkgs.catppuccin-cursors.mochaMauve;
+    gtk.enable = true;
+    x11.enable = true;
+  };
 }
