@@ -1,6 +1,6 @@
 /* dacctal's LibreWolf userChrome.css */
-/* sourced from https://github.com/dacctal/daccfiles/blob/main/browser-stuff/userChrome.css */
+/* https://git.symlinx.net/daccfiles/plain/browser-stuff/userChrome.css */
 #TabsToolbar { display: none !important; }
 #sidebar-box #sidebar-header { display: none !important; }
-* { border-radius: 8px; }
+
 * { border-radius: 0px; }

@@ -1,5 +1,4 @@
 { pkgs, ... }: let
-  # dacctal's browser CSS (https://github.com/dacctal/daccfiles)
   userChrome = builtins.readFile ./userChrome.css;
 in {
   programs.librewolf = {
@@ -18,5 +17,9 @@ in {
       isDefault = true;
       userChrome = userChrome;
     };
+  };
+
+  home.file.".config/librewolf/sidebery-sidebar.css" = {
+    source = ./sidebery-sidebar.css;
   };
 }
