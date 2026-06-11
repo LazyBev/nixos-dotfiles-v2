@@ -155,7 +155,7 @@ in {
 
           "Alt+Return".spawn-sh = getExe pkgs.foot;
           "Alt+B".spawn-sh = getExe pkgs.qutebrowser;
-          "Alt+Shift+B".spawn-sh = getExe pkgs.firefox;
+          "Alt+Shift+B".spawn-sh = getExe pkgs.librewolf;
           "Alt+T".spawn-sh = "${getExe pkgs.foot} -e yazi";
           "Alt+Shift+T".spawn-sh = getExe pkgs.thunar;
           "Alt+S".spawn-sh = getExe pkgs.steam;
