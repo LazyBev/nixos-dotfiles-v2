@@ -1,4 +1,7 @@
-{ pkgs, ... }: {
+{ pkgs, ... }: let
+  # dacctal's browser CSS (https://github.com/dacctal/daccfiles)
+  userChrome = builtins.readFile ./userChrome.css;
+in {
   programs.librewolf = {
     enable = true;
     settings = {
@@ -8,6 +11,12 @@
       "privacy.clearOnShutdown.cookies" = false;
       "network.cookie.lifetimePolicy" = 0;
       "browser.fullscreen.autohide" = false;
+    };
+    profiles.default = {
+      id = 0;
+      name = "default";
+      isDefault = true;
+      userChrome = userChrome;
     };
   };
 }
