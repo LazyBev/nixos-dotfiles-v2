@@ -153,32 +153,63 @@ in {
         in {
           "Alt+Shift+Slash".show-hotkey-overlay = {};
 
-          "Alt+Return".spawn-sh = getExe pkgs.foot;
-          "Alt+B".spawn-sh = getExe pkgs.qutebrowser;
-          "Alt+Shift+B".spawn-sh = getExe pkgs.librewolf;
-          "Alt+T".spawn-sh = "${getExe pkgs.foot} -e yazi";
-          "Alt+Shift+T".spawn-sh = getExe pkgs.thunar;
-          "Alt+S".spawn-sh = getExe pkgs.steam;
-          "Alt+D".spawn-sh = getExe pkgs.fuzzel;
-          "Alt+V".spawn-sh = getExe pkgs.vesktop;
-          "Alt+E".spawn-sh = "${getExe pkgs.foot} -e nvim";
-          "Alt+Shift+E".spawn-sh = getExe pkgs.vscodium;
-          "Alt+Y".spawn-sh = getExe pkgs.waypaper;
+          "Alt+Return".spawn-sh     = getExe pkgs.foot;                                   
+          "Alt+Shift+Return".spawn-sh = "${getExe pkgs.foot} -e zellij";                  
+          "Alt+B".spawn-sh          = getExe pkgs.qutebrowser;
+          "Alt+Shift+B".spawn-sh    = getExe pkgs.librewolf;
+          "Alt+T".spawn-sh          = "${getExe pkgs.foot} -e yazi";
+          "Alt+Shift+T".spawn-sh    = getExe pkgs.thunar;
+          "Alt+E".spawn-sh          = "${getExe pkgs.foot} -e nvim";
+          "Alt+Shift+E".spawn-sh    = getExe pkgs.vscodium;
+          "Alt+S".spawn-sh          = "${getExe pkgs.foot} -e rmpc";
+          "Alt+Shift+S".spawn-sh    = getExe pkgs.steam;                                  
+          "Alt+V".spawn-sh          = "${getExe pkgs.foot} -e btop";
+          "Alt+Shift+V".spawn-sh    = getExe pkgs.vesktop;
+          "Alt+D".spawn-sh          = getExe pkgs.fuzzel;                                 
+          "Alt+Y".spawn-sh          = getExe pkgs.waypaper;                               
 
-          "Alt+Escape".spawn-sh = "${getExe myNoctalia} ipc call sessionMenu toggle";
+          # ── Session / system ───────────────────────────────────────────────────
+          "Alt+Escape".spawn-sh     = "${getExe myNoctalia} ipc call sessionMenu toggle";
+          "Mod+Shift+L".spawn-sh    = "${getExe pkgs.gtklock} -s /home/${vars.username}/.config/gtklock/style.css -b /home/${vars.username}/Pictures/matikanefuku.png";
+          "Alt+Ctrl+P".spawn-sh     = "${getExe pkgs.doas} reboot";
+          "Alt+Shift+P".spawn-sh    = "${getExe pkgs.doas} poweroff";
+          "Alt+Shift+Backspace".quit = {};
 
+          # ── Screenshots ────────────────────────────────────────────────────────
+          "Alt+X".screenshot        = {};                                                  # region
+          "Alt+Shift+X".screenshot-screen = {};                                            # fullscreen
+          "Alt+Ctrl+X".screenshot-window  = {};                                            # window
+
+          # ── Window management ──────────────────────────────────────────────────
           "Ctrl+Alt+Q".close-window = {};
 
-          "Alt+H".focus-column-left = {};
+          "Alt+H".focus-column-left  = {};
           "Alt+L".focus-column-right = {};
-          "Alt+K".focus-window-up = {};
-          "Alt+J".focus-window-down = {};
+          "Alt+K".focus-window-up    = {};
+          "Alt+J".focus-window-down  = {};
 
-          "Alt+Shift+H".move-column-left = {};
+          "Alt+Shift+H".move-column-left  = {};
           "Alt+Shift+L".move-column-right = {};
-          "Alt+Shift+K".move-window-up = {};
-          "Alt+Shift+J".move-window-down = {};
+          "Alt+Shift+K".move-window-up    = {};
+          "Alt+Shift+J".move-window-down  = {};
 
+          "Alt+Tab".toggle-window-floating = {};
+          "Alt+Ctrl+Tab".focus-floating    = {};
+          "Alt+Space".focus-tiling         = {};
+          "Alt+F".fullscreen-window        = {};
+          "Alt+W".switch-preset-column-width = {};
+
+          "Alt+Minus".set-column-width       = "-10%";
+          "Alt+Equal".set-column-width       = "+10%";
+          "Alt+Shift+Minus".set-window-height = "-10%";
+          "Alt+Shift+Equal".set-window-height = "+10%";
+
+          "Alt+Comma".consume-window-into-column    = {};
+          "Alt+Period".expel-window-from-column     = {};
+          "Alt+BracketLeft".consume-or-expel-window-left  = {};
+          "Alt+BracketRight".consume-or-expel-window-right = {};
+
+          # ── Workspaces ─────────────────────────────────────────────────────────
           "Alt+1".focus-workspace = "1";
           "Alt+2".focus-workspace = "2";
           "Alt+3".focus-workspace = "3";
@@ -188,8 +219,8 @@ in {
           "Alt+7".focus-workspace = "7";
           "Alt+8".focus-workspace = "8";
           "Alt+9".focus-workspace = "9";
+          "Alt+N".focus-workspace-up   = {};
           "Alt+M".focus-workspace-down = {};
-          "Alt+N".focus-workspace-up = {};
 
           "Alt+Shift+1".move-column-to-workspace = "1";
           "Alt+Shift+2".move-column-to-workspace = "2";
@@ -200,37 +231,20 @@ in {
           "Alt+Shift+7".move-column-to-workspace = "7";
           "Alt+Shift+8".move-column-to-workspace = "8";
           "Alt+Shift+9".move-column-to-workspace = "9";
+          "Alt+Shift+N".move-column-to-workspace-up   = {};
           "Alt+Shift+M".move-column-to-workspace-down = {};
-          "Alt+Shift+N".move-column-to-workspace-up = {};
 
-          "Alt+Minus".set-column-width = "-10%";
-          "Alt+Equal".set-column-width = "+10%";
-          "Alt+Shift+Minus".set-window-height = "-10%";
-          "Alt+Shift+Equal".set-window-height = "+10%";
-          "Alt+Comma".consume-window-into-column = {};
-          "Alt+Period".expel-window-from-column = {};
-          "Alt+BracketLeft".consume-or-expel-window-left = {};
-          "Alt+BracketRight".consume-or-expel-window-right = {};
-
-          "Alt+Tab".toggle-window-floating = {};
-          "Alt+Ctrl+Tab".focus-floating = {};
-          "Alt+Space".focus-tiling = {};
-          "Alt+W".switch-preset-column-width = {};
-          "Alt+F".fullscreen-window = {};
-
-          "Alt+Shift+Backspace".quit = {};
-          "Mod+Shift+L".spawn-sh = "${getExe pkgs.gtklock} -s /home/${vars.username}/.config/gtklock/style.css -b /home/${vars.username}/Pictures/matikanefuku.png";
-          "Alt+Ctrl+P".spawn-sh = "${getExe pkgs.doas} reboot";
-          "Alt+Shift+P".spawn-sh = "${getExe pkgs.doas} poweroff";
-
-          "XF86AudioRaiseVolume".spawn-sh = "${getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 0.1+";
-          "XF86AudioLowerVolume".spawn-sh = "${getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 0.1-";
-          "XF86AudioMute".spawn-sh = "${getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SINK@ toggle";
-          "XF86AudioMicMute".spawn-sh = "${getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
-
-          "Alt+X".screenshot = {};
-          "Alt+Shift+X".screenshot-screen = {};
-          "Alt+Ctrl+X".screenshot-window = {};
+          # ── Media / volume ─────────────────────────────────────────────────────
+          "XF86AudioRaiseVolume".spawn-sh  = "${getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 0.1+";
+          "XF86AudioLowerVolume".spawn-sh  = "${getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 0.1-";
+          "XF86AudioMute".spawn-sh         = "${getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SINK@ toggle";
+          "XF86AudioMicMute".spawn-sh      = "${getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+          "XF86AudioPlay".spawn-sh         = "${getExe' pkgs.playerctl "playerctl"} play-pause";
+          "XF86AudioNext".spawn-sh         = "${getExe' pkgs.playerctl "playerctl"} next";
+          "XF86AudioPrev".spawn-sh         = "${getExe' pkgs.playerctl "playerctl"} previous";
+          "Alt+Ctrl+Space".spawn-sh        = "${getExe' pkgs.playerctl "playerctl"} play-pause";
+          "Alt+Ctrl+L".spawn-sh            = "${getExe' pkgs.playerctl "playerctl"} next";
+          "Alt+Ctrl+H".spawn-sh            = "${getExe' pkgs.playerctl "playerctl"} previous";
         };
       };
     };
