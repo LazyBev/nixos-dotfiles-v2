@@ -12,7 +12,7 @@
   xdg.configFile."xdg-desktop-portal/portals.conf".text = ''[preferred] default=gtk'';
   xdg.configFile."zellij/config.kdl".source = ../../../configs/apps/zellij/config.kdl;
 
-  xdg.configFile."foot/foot.ini".source = ../../../configs/apps/foot/foot.ini;
+  xdg.configFile."alacritty/alacritty.toml".source = ../../../configs/apps/alacritty/alacritty.toml;
 
   xdg.configFile."fcitx5/config".source = ../../../configs/apps/fcitx5/config;
   xdg.configFile."fcitx5/profile".source = ../../../configs/apps/fcitx5/profile;

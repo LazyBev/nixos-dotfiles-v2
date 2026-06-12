@@ -139,7 +139,7 @@ binds {
   Alt+Shift+Slash { show-hotkey-overlay; }
 
   // Apps
-  Alt+Return      { spawn "foot"; }
+  Alt+Return      { spawn "alacritty"; }
   Alt+B           { spawn "qutebrowser"; }
   Alt+Shift+B     { spawn "firefox"; }
   Alt+T           { spawn "nemo"; }
@@ -148,7 +148,7 @@ binds {
   Alt+D           { spawn "fuzzel"; }
   Alt+V           { spawn "lutris"; }
   Alt+Y           { spawn "waypaper"; }
-  Alt+C           { spawn "foot" "-e" "nvim" "/etc/nixos/home.nix"; }
+  Alt+C           { spawn "alacritty" "-e" "nvim" "/etc/nixos/home.nix"; }
 
   // Noctalia IPC
   Alt+Space       { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }

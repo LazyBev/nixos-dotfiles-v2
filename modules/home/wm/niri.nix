@@ -97,7 +97,7 @@ in {
             open-floating = true;
           }
           {
-            matches = [{app-id = "^foot$";}];
+            matches = [{app-id = "^Alacritty$";}];
             default-column-width.proportion = 0.5;
           }
           {
@@ -153,20 +153,20 @@ in {
         in {
           "Alt+Shift+Slash".show-hotkey-overlay = {};
 
-          "Alt+Return".spawn-sh     = getExe pkgs.foot;                                   
-          "Alt+Shift+Return".spawn-sh = "${getExe pkgs.foot} -e zellij";                  
+          "Alt+Return".spawn-sh     = getExe pkgs.alacritty;
+          "Alt+Shift+Return".spawn-sh = "${getExe pkgs.alacritty} -e zellij";
           "Alt+B".spawn-sh          = getExe pkgs.qutebrowser;
           "Alt+Shift+B".spawn-sh    = getExe pkgs.librewolf;
-          "Alt+T".spawn-sh          = "${getExe pkgs.foot} -e yazi";
+          "Alt+T".spawn-sh          = "${getExe pkgs.alacritty} -e yazi";
           "Alt+Shift+T".spawn-sh    = getExe pkgs.thunar;
-          "Alt+E".spawn-sh          = "${getExe pkgs.foot} -e nvim";
+          "Alt+E".spawn-sh          = "${getExe pkgs.alacritty} -e nvim";
           "Alt+Shift+E".spawn-sh    = getExe pkgs.vscodium;
-          "Alt+S".spawn-sh          = "${getExe pkgs.foot} -e rmpc";
-          "Alt+Shift+S".spawn-sh    = getExe pkgs.steam;                                  
-          "Alt+V".spawn-sh          = "${getExe pkgs.foot} -e btop";
+          "Alt+S".spawn-sh          = "${getExe pkgs.alacritty} -e rmpc";
+          "Alt+Shift+S".spawn-sh    = getExe pkgs.steam;
+          "Alt+V".spawn-sh          = "${getExe pkgs.alacritty} -e btop";
           "Alt+Shift+V".spawn-sh    = getExe pkgs.vesktop;
-          "Alt+D".spawn-sh          = getExe pkgs.fuzzel;                                 
-          "Alt+Y".spawn-sh          = getExe pkgs.waypaper;                               
+          "Alt+D".spawn-sh          = getExe pkgs.fuzzel;
+          "Alt+Y".spawn-sh          = getExe pkgs.waypaper;
 
           # ── Session / system ───────────────────────────────────────────────────
           "Alt+Escape".spawn-sh     = "${getExe myNoctalia} ipc call sessionMenu toggle";
@@ -176,9 +176,9 @@ in {
           "Alt+Shift+Backspace".quit = {};
 
           # ── Screenshots ────────────────────────────────────────────────────────
-          "Alt+X".screenshot        = {};                                                  # region
-          "Alt+Shift+X".screenshot-screen = {};                                            # fullscreen
-          "Alt+Ctrl+X".screenshot-window  = {};                                            # window
+          "Alt+X".screenshot        = {};
+          "Alt+Shift+X".screenshot-screen = {};
+          "Alt+Ctrl+X".screenshot-window  = {};
 
           # ── Window management ──────────────────────────────────────────────────
           "Ctrl+Alt+Q".close-window = {};

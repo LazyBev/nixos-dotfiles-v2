@@ -170,7 +170,7 @@ c.content.autoplay = False
 c.content.notifications.enabled = False
 c.content.geolocation = False
 c.content.cookies.store = True
-c.content.cookies.accept = "all"
+c.content.cookies.accept = "no-3rdparty"
 c.content.blocking.enabled = True
 c.content.blocking.method = "both"
 c.content.blocking.adblock.lists = [
@@ -194,7 +194,7 @@ c.zoom.mouse_divider = 512
 # =============================================================================
 # Editor
 # =============================================================================
-c.editor.command = ["foot", "-e", "nvim", "{file}", "-c", "normal {line}G{column}l"]
+c.editor.command = ["alacritty", "-e", "nvim", "{file}", "-c", "normal {line}G{column}l"]
 
 # =============================================================================
 # Hints

@@ -12,15 +12,20 @@ in { ... }: {
       ll = "eza -l";
       la = "eza -la";
       lt = "eza -l --tree";
-      fu = "cd ${vars.repoDir} && nix flake update";
-      rb = "doas nixos-rebuild switch --flake ${vars.repoDir}#${vars.hostname}";
-      rb-lap = "doas nixos-rebuild switch --flake ${vars.repoDir}#${vars.hostname}-laptop";
-      sysUpd = "cd ${vars.repoDir} && nix flake update && doas nixos-rebuild switch --flake ${vars.repoDir}#${vars.hostname}";
-      sysUpd-lap = "cd ${vars.repoDir} && nix flake update && doas nixos-rebuild switch --flake ${vars.repoDir}#${vars.hostname}-laptop";
       battery = "echo \"$(cat /sys/class/power_supply/BAT1/capacity)%\"";
       ncUpd = "noctalia-shell ipc call state all > ${vars.repoDir}/modules/configs/apps/noctalia/noctalia.json";
       gen-list = "doas nixos-rebuild list-generations";
-      gc-old = "doas nix-env --delete-generations old -p /nix/var/nix/profiles/system && nix-collect-garbage -d && doas nix-collect-garbage -d && doas nixos-rebuild list-generations";
+
+      check = "nix flake check";
+      lint = "nix flake check";
+      flakeupd = "cd ${vars.repoDir} && nix flake update";
+      upgrade = "doas nixos-rebuild switch --flake ${vars.repoDir}#${vars.hostname}";
+      upgrade-laptop = "doas nixos-rebuild switch --flake ${vars.repoDir}#${vars.hostname}-laptop";
+      build = "doas nixos-rebuild switch --flake ${vars.repoDir}#${vars.hostname}";
+      gc = "doas nix-collect-garbage --delete-older-than 30d";
+      clean = "doas nix-env --delete-generations old -p /nix/var/nix/profiles/system && nix-collect-garbage -d && doas nix-collect-garbage -d && doas nixos-rebuild list-generations";
+      sysupd = "cd ${vars.repoDir} && nix flake update && doas nixos-rebuild switch --flake ${vars.repoDir}#${vars.hostname}";
+      sysupd-laptop = "cd ${vars.repoDir} && nix flake update && doas nixos-rebuild switch --flake ${vars.repoDir}#${vars.hostname}-laptop";
       gif = "ffmpeg -vf \"fps=10,scale=720:-1:flags=lanczos,split[s0][s1];[s0]palettegen=max_colors=256[p];[s1][p]paletteuse=dither=bayer\"";
       gifslow = "ffmpeg -vf \"fps=5,scale=720:-1:flags=lanczos,split[s0][s1];[s0]palettegen=max_colors=256[p];[s1][p]paletteuse=dither=bayer\"";
       "rec" = "ffmpeg -f x11grab -video_size 1920x1080 -framerate 30 -i :0.0 -c:v libx264 -preset ultrafast -pix_fmt yuv420p";

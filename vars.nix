@@ -8,7 +8,7 @@ let
       cursorTheme = "catppuccin-mocha-mauve-cursors";
       cursorSize = 24;
       font = "Pragmasevka Nerd Font";
-      terminal = "foot";
+      terminal = "alacritty";
       qtTheme = "adwaita-dark";
     };
     caelus = {
@@ -16,7 +16,7 @@ let
       cursorTheme = "catppuccin-mocha-mauve-cursors";
       cursorSize = 24;
       font = "Pragmasevka Nerd Font";
-      terminal = "foot";
+      terminal = "alacritty";
       qtTheme = "adwaita-dark";
     };
   };

@@ -8,6 +8,6 @@
     initialPassword = "changeme";
     shell = pkgs.fish;
     description = vars.fullname;
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" ];
   };
 }
