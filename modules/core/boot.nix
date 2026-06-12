@@ -216,8 +216,8 @@ in {
           "kernel.kptr_restrict" = 2;
           "kernel.dmesg_restrict" = 1;
           "fs.suid_dumpable" = 0;
-          "net.core.rmem_max" = 134217728;
-          "net.core.wmem_max" = 134217728;
+          "net.core.rmem_max" = 16777216;
+          "net.core.wmem_max" = 16777216;
         };
       };
 
@@ -227,6 +227,13 @@ in {
       i18n.defaultLocale = "en_GB.UTF-8";
       services.xserver.xkb.layout = vars.keyboardLayout;
       console.keyMap = "uk";
+
+      programs.git = {
+        enable = true;
+        config = {
+          safe.directory = "/home/yari/nixos-cfg";
+        };
+      };
 
       networking.hostName = vars.hostname;
       networking.networkmanager.enable = true;
@@ -388,25 +395,7 @@ in {
                 }
               '';
             };
-            "mpd" = {
-              state = "enforce";
-              profile = ''
-                #include <tunables/global>
-                profile mpd /nix/store/*/bin/mpd {
-                  #include <abstractions/base>
-                  #include <abstractions/nameservice>
-                  #include <abstractions/audio>
-                  #include <abstractions/dbus-session>
-                  /nix/store/*/bin/mpd mr,
-                  owner @{HOME}/.config/mpd/** rwk,
-                  owner @{HOME}/.local/share/mpd/** rwk,
-                  owner @{HOME}/Music/** r,
-                  /run/user/*/pipewire-* rw,
-                  /run/user/*/bus rw,
-                }
-              '';
             };
-          };
         };
         pam.services = {
           doas = {};
