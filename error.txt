@@ -1,0 +1,25 @@
+warning: Git tree '/home/yari/nixos-cfg' is dirty
+warning: Git tree '/home/yari/nixos-cfg' is dirty
+error:
+       … while evaluating the attribute 'root.result'
+         at «flakes-internal»/call-flake.nix:94:7:
+           93|     {
+           94|       result =
+             |       ^
+           95|         if node.flake or true then
+
+       … in the left operand of the update (//) operator
+         at «flakes-internal»/call-flake.nix:75:9:
+           74|       result =
+           75|         outputs
+             |         ^
+           76|         # We add the sourceInfo attribute for its metadata, as they are
+
+       (stack trace truncated; use '--show-trace' to show the full, detailed trace)
+
+       error: Path 'modules/home/wm/dwl.nix' in the repository "/home/yari/nixos-cfg" is not tracked by Git.
+
+       To make it visible to Nix, run:
+
+       git -C "/home/yari/nixos-cfg" add "modules/home/wm/dwl.nix"
+Command 'nix --extra-experimental-features 'nix-command flakes' build --print-out-paths '.#nixosConfigurations."gentuwu".config.system.build.nixos-rebuild' --max-jobs 6 --no-link' returned non-zero exit status 1.

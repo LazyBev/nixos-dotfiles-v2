@@ -26,6 +26,7 @@
       ../home/services.nix
       self.nixosModules.overlays
       self.nixosModules.niriPackages
+      self.nixosModules.dwlPackages
     ];
     config = {
       gentuwu.powerProfiles.enable = lib.mkDefault true;
