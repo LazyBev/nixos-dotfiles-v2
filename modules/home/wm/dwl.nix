@@ -5,7 +5,7 @@
 in {
   flake.nixosModules.dwlPackages = { pkgs, self, ... }: {
     environment.systemPackages = with pkgs; [
-      dwl grim slurp wmenu playerctl
+      dwl grim slurp wmenu playerctl dunst fcitx5 networkmanagerapplet
     ];
 
     services.displayManager.sessionPackages =
@@ -17,7 +17,7 @@ in {
           text = ''
             [Desktop Entry]
             Name=dwl
-            Comment=dwl Wayland compositor (niri-like)
+            Comment=dwl Wayland compositor
             Exec=${self.packages.${system}.dwl-session}/bin/dwl-session
             Type=Application
           '';
@@ -43,30 +43,27 @@ in {
     };
   in {
     packages.dwl-session = pkgs.writeShellScriptBin "dwl-session" ''
-      set -a
-      XDG_SESSION_TYPE=wayland
-      XDG_CURRENT_DESKTOP=dwl
-      XDG_SESSION_DESKTOP=dwl
-      GDK_BACKEND=wayland
-      GTK_USE_PORTAL=1
-      QT_QPA_PLATFORM=wayland
-      QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-      QT_AUTO_SCREEN_SCALE_FACTOR=1
-      ELECTRON_OZONE_PLATFORM_HINT=wayland
-      MOZ_ENABLE_WAYLAND=1
-      SDL_VIDEODRIVER=wayland
-      CLUTTER_BACKEND=wayland
-      _JAVA_AWT_WM_NONREPARENTING=1
-      XDG_DESKTOP_PORTAL=xdg-desktop-portal
-      XCURSOR_THEME=${vars.cursorTheme}
-      XCURSOR_SIZE=${toString vars.cursorSize}
-      unset DISPLAY
-      WLR_NO_HARDWARE_CURSORS=1
-      set +a
+      export XDG_SESSION_TYPE=wayland
+      export XDG_CURRENT_DESKTOP=dwl
+      export XDG_SESSION_DESKTOP=dwl
+      export GDK_BACKEND=wayland
+      export QT_QPA_PLATFORM=wayland
+      export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+      export QT_AUTO_SCREEN_SCALE_FACTOR=1
+      export ELECTRON_OZONE_PLATFORM_HINT=wayland
+      export MOZ_ENABLE_WAYLAND=1
+      export SDL_VIDEODRIVER=wayland
+      export CLUTTER_BACKEND=wayland
+      export _JAVA_AWT_WM_NONREPARENTING=1
+      export XCURSOR_THEME=${vars.cursorTheme}
+      export XCURSOR_SIZE=${toString vars.cursorSize}
+      export WLR_NO_HARDWARE_CURSORS=1
 
+      # Autostart
+      ${pkgs.dunst}/bin/dunst &
+      ${pkgs.fcitx5}/bin/fcitx5 -d &
       ${myNoctalia}/bin/noctalia-shell &
       ${pkgs.networkmanagerapplet}/bin/nm-applet --indicator &
-      ${pkgs.bash}/bin/bash -lc "sleep 1 && ${pkgs.swaybg}/bin/swaybg -i ~/Pictures/matikanefuku.png" &
 
       exec ${pkgs.dwl}/bin/dwl "$@"
     '';
