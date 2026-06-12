@@ -20,12 +20,17 @@ clean:
 sysupd host:
 	nix flake update && doas nixos-rebuild switch --flake .#{{host}} -j$(( $(nproc) / 2 ))
 
+gitwho name email:
+	git config --global user.name "{{name}}"
+	git config --global user.email "{{email}}"
+
 gp msg:
 	git add .
 	git commit -m "{{msg}}"
 	git push
 
 install host:
+	cfdisk /dev/nvme0n1 && \
 	wipefs -a /dev/nvme0n1 && \
 	sgdisk --zap-all /dev/nvme0n1 && \
 	partprobe /dev/nvme0n1 && sleep 2 && \
