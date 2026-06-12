@@ -127,6 +127,12 @@ in { ... }: {
               command doas $argv
           end
       end
+
+      function gp
+        command git add .
+        command git commit -m $argv
+        command git push
+      end
     '';
   };
 }
