@@ -47,19 +47,6 @@
       ];
     };
 
-    devShells.node = pkgs.mkShell {
-      packages = with pkgs; [
-        nodejs
-        typescript
-        nodePackages.typescript-language-server
-        nodePackages.prettier
-        nodePackages.eslint
-        nodePackages.tailwindcss
-        yarn
-        pnpm
-      ];
-    };
-
     devShells.java = pkgs.mkShell {
       packages = with pkgs; [
         jdk

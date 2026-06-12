@@ -23,8 +23,6 @@ in {
     ({ config, lib, vars, inputs, ... }: {
       imports = [ inputs.disko.nixosModules.disko ];
 
-      options.gentuwu.desktopHardware.enable = lib.mkEnableOption "gentuwu desktop hardware configuration";
-
       config = lib.mkIf config.gentuwu.desktopHardware.enable {
         boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
         boot.initrd.kernelModules = [ ];
@@ -80,8 +78,6 @@ in {
 
     # ── Nvidia (desktop) ────────────────────────────────────────────────────────
     ({ config, lib, ... }: {
-      options.gentuwu.nvidia.enable = lib.mkEnableOption "NVIDIA GPU configuration";
-
       config = lib.mkIf config.gentuwu.nvidia.enable {
         hardware.nvidia = {
           modesetting.enable = true;

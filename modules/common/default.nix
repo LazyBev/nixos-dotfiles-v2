@@ -14,16 +14,15 @@
       default = "desktop";
       description = "Whether this machine is a desktop or laptop";
     };
+    options.gentuwu.desktopHardware.enable = lib.mkEnableOption "gentuwu desktop hardware configuration";
+    options.gentuwu.nvidia.enable = lib.mkEnableOption "NVIDIA GPU configuration";
+    options.gentuwu.laptopHardware.enable = lib.mkEnableOption "gentuwu laptop hardware configuration";
+    options.gentuwu.nvidiaLaptop.enable = lib.mkEnableOption "NVIDIA GPU (laptop) configuration";
     imports = [
+      inputs.nur.modules.nixos.default
       ../core/boot.nix
-      ../core/power.nix
-      ../core/programs.nix
-      ../core/services.nix
       ../home/apps.nix
       ../home/services.nix
-      ../home/env.nix
-      ../home/fonts.nix
-      ../home/security.nix
       self.nixosModules.overlays
       self.nixosModules.niriPackages
     ];

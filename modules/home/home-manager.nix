@@ -57,9 +57,11 @@ in {
       name = "default";
       isDefault = true;
       userChrome = userChrome;
-      extensions = with pkgs.firefox-addons; [
-        ublock-origin sponsorblock return-youtube-dislikes
-      ];
+      extensions = {
+        packages = with pkgs.nur.repos.rycee.firefox-addons; [
+          ublock-origin sponsorblock return-youtube-dislikes
+        ];
+      };
 
       search = {
         force = true;
