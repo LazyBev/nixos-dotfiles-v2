@@ -35,7 +35,16 @@ in {
       la = "eza -la";
       lt = "eza -l --tree";
       battery = "echo \"$(cat /sys/class/power_supply/BAT1/capacity)%\"";
-      ncUpd = "noctalia-shell ipc call state all > ${vars.repoDir}/modules/configs/apps/noctalia/noctalia.json";
+      ncUpd = "noctalia-shell ipc call state all > ${vars.repoDir}/configs/apps/noctalia/noctalia.json";
+      check = "nix flake check";
+      flakeupd = "nix flake update";
+      gc = "doas nix-collect-garbage --delete-older-than 30d";
+      lint = "nix flake check";
+      clean = "doas nix-collect-garbage -d; nix-collect-garbage -d";
+      devenv-shell = "devenv shell";
+      devenv-test = "devenv test";
+      devenv-update = "devenv update";
+      devenv-gc = "devenv gc";
       gen-list = "doas nixos-rebuild list-generations";
       gif = "ffmpeg -vf \"fps=10,scale=720:-1:flags=lanczos,split[s0][s1];[s0]palettegen=max_colors=256[p];[s1][p]paletteuse=dither=bayer\"";
       gifslow = "ffmpeg -vf \"fps=5,scale=720:-1:flags=lanczos,split[s0][s1];[s0]palettegen=max_colors=256[p];[s1][p]paletteuse=dither=bayer\"";
@@ -64,6 +73,32 @@ in {
 
       if set -q WAYLAND_DISPLAY && not set -q DISPLAY
         set -x DISPLAY :1
+      end
+
+      function gp
+        git add .
+        git commit -m "$argv"
+        git push
+      end
+
+      function upgrade
+        doas nixos-rebuild switch --flake .#$argv -j$(math (nproc) / 2)
+      end
+
+      function sysupd
+        nix flake update && doas nixos-rebuild switch --flake .#$argv -j$(math (nproc) / 2)
+      end
+
+      function install
+        wipefs -a /dev/nvme0n1 && sgdisk --zap-all /dev/nvme0n1 && partprobe /dev/nvme0n1 && sleep 2 && wipefs -a /dev/nvme0n1p* 2>/dev/null; nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko --flake .#$argv && nixos-install --root /mnt --max-jobs 1 --flake .#$argv
+      end
+
+      function search
+        nix search nixpkgs $argv
+      end
+
+      function search-options
+        nix-instantiate --eval -E "(import <nixpkgs/nixos> {}).options" | grep -i $argv
       end
 
       function __fish_h_item; echo $history[1]; end

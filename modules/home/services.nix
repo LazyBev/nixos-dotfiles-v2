@@ -59,18 +59,6 @@
   };
 
   # ── MPD ──────────────────────────────────────────────────────────────────────
-  services.mpd = {
-    enable = true;
-    user = vars.username;
-    settings = {
-      music_directory = "/home/${vars.username}/Music";
-      audio_output = [{
-        type = "pipewire";
-        name = "PipeWire Output";
-      }];
-    };
-  };
-
   # ── SDDM ─────────────────────────────────────────────────────────────────────
   services.xserver.enable = true;
   services.displayManager.defaultSession = "niri";
@@ -101,13 +89,15 @@
         bind_host = "0.0.0.0";
         port = 53;
         upstream_dns = [
-          "https://dns.cloudflare.com/dns-query"
-          "https://dns.quad9.net/dns-query"
+          "tls://dns.nextdns.io"
+          "https://dns.nextdns.io/dns-query"
         ];
-        bootstrap_dns = [ "1.1.1.1:53" "9.9.9.9:53" ];
+        bootstrap_dns = [ "45.90.28.0:53" "45.90.30.0:53" ];
         filtering_enabled = true;
         filters_update_interval = 48;
-        edns_client_subnet = false;
+        edns_client_subnet = {
+          enabled = false;
+        };
         block_services = [];
         parental_enabled = false;
         safesearch_enabled = true;

@@ -59,7 +59,7 @@ in {
       userChrome = userChrome;
       extensions = {
         packages = with pkgs.nur.repos.rycee.firefox-addons; [
-          ublock-origin sponsorblock return-youtube-dislikes
+          ublock-origin sponsorblock return-youtube-dislikes darkreader sidebery vimium
         ];
       };
 
