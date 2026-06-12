@@ -131,6 +131,9 @@
     allowedTCPPorts = [ 53 3000 ];
   };
 
+  # ── Login keyring (for git push / SSH passphrases) ────────────────────────────
+  services.gnome.gnome-keyring.enable = true;
+
   # ── Niri session ─────────────────────────────────────────────────────────────
   programs.niri = {
     enable = true;
