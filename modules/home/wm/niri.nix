@@ -20,7 +20,7 @@ in {
       qutebrowser
 
       # media
-      mpv rmpc
+      mpv rmpc playerctl
 
       # monitoring
       btop cava
@@ -30,7 +30,19 @@ in {
 
       # games
       steam
+
+      # dwl (alternative compositor)
+      dwl grim slurp wmenu playerctl
     ];
+
+    environment.etc."wayland-sessions/dwl.desktop".text = ''
+      [Desktop Entry]
+      Name=dwl
+      Comment=dwl Wayland compositor
+      Exec=${pkgs.dwl}/bin/dwl
+      Type=Application
+      NoDisplay=true
+    '';
   };
 
   # ── Niri compositor wrapper ──────────────────────────────────────────────────

@@ -3,6 +3,10 @@
     url = "https://git.bwaaa.monster/beaker";
     rev = "3fab89ecf8f4c664477a82add660d28db87357b4";
   };
+  dwlPatches = builtins.path {
+    path = ../configs/apps/dwl/patches;
+    name = "dwl-patches";
+  };
 in {
   flake.nixosModules.overlays = {...}: {
     nixpkgs.overlays = [
@@ -48,6 +52,19 @@ in {
             cp -r templates static -t $out/share/omnisearch/
           '';
         };
+
+        dwl = (prev.dwl.override {
+          enableXWayland = true;
+          configH = ../configs/apps/dwl/config.h;
+        }).overrideAttrs (old: {
+          patches = (old.patches or []) ++ [
+            (dwlPatches + "/vanitygaps.patch")
+            (dwlPatches + "/attachbottom.patch")
+            (dwlPatches + "/controlled_fullscreen.patch")
+            (dwlPatches + "/movestack.patch")
+            (dwlPatches + "/dragmfact.patch")
+          ];
+        });
 
         caelus-theme = prev.stdenvNoCC.mkDerivation {
           pname = "caelus-theme";
