@@ -1,0 +1,256 @@
+// =============================================================================
+// Zellij Config
+// =============================================================================
+
+theme "dracula"
+
+pane_frames false
+simplified_ui false
+ui {
+    pane_frames {
+        rounded_corners true
+        hide_session_name false
+    }
+}
+
+mouse_mode true
+scroll_buffer_size 10000
+copy_command "wl-copy"
+copy_on_select true
+on_force_close "detach"
+support_kitty_keyboard_protocol true
+
+// =============================================================================
+// Keybinds
+// =============================================================================
+keybinds clear-defaults=true {
+
+    // --- Locked mode ---
+    locked {
+        bind "Ctrl g" { SwitchToMode "Normal"; }
+    }
+
+    // --- Normal mode ---
+    normal {
+        bind "Ctrl g" { SwitchToMode "Locked"; }
+        bind "Ctrl p" { SwitchToMode "Pane"; }
+        bind "Ctrl t" { SwitchToMode "Tab"; }
+        bind "Ctrl n" { SwitchToMode "Resize"; }
+        bind "Ctrl s" { SwitchToMode "Scroll"; }
+        bind "Ctrl o" { SwitchToMode "Session"; }
+        bind "Ctrl h" { SwitchToMode "Move"; }
+        bind "Ctrl q" { Quit; }
+        bind "Ctrl d" { Detach; }
+    }
+
+    // --- Pane mode ---
+    pane {
+        bind "Esc" "Ctrl p" { SwitchToMode "Normal"; }
+        bind "h" { MoveFocus "Left"; }
+        bind "l" { MoveFocus "Right"; }
+        bind "j" { MoveFocus "Down"; }
+        bind "k" { MoveFocus "Up"; }
+        bind "n" { NewPane; SwitchToMode "Normal"; }
+        bind "d" { NewPane "Down"; SwitchToMode "Normal"; }
+        bind "r" { NewPane "Right"; SwitchToMode "Normal"; }
+        bind "x" { CloseFocus; SwitchToMode "Normal"; }
+        bind "f" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
+        bind "z" { TogglePaneFrames; SwitchToMode "Normal"; }
+        bind "w" { ToggleFloatingPanes; SwitchToMode "Normal"; }
+        bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "Normal"; }
+        bind "i" { SwitchToMode "RenamePane"; PaneNameInput 0; }
+        bind "Tab" { SwitchFocus; }
+    }
+
+    // --- Tab mode ---
+    tab {
+        bind "Esc" "Ctrl t" { SwitchToMode "Normal"; }
+        bind "h" "Left" { GoToPreviousTab; }
+        bind "l" "Right" { GoToNextTab; }
+        bind "n" { NewTab; SwitchToMode "Normal"; }
+        bind "x" { CloseTab; SwitchToMode "Normal"; }
+        bind "s" { ToggleActiveSyncTab; SwitchToMode "Normal"; }
+        bind "b" { BreakPane; SwitchToMode "Normal"; }
+        bind "i" { SwitchToMode "RenameTab"; TabNameInput 0; }
+        bind "1" { GoToTab 1; SwitchToMode "Normal"; }
+        bind "2" { GoToTab 2; SwitchToMode "Normal"; }
+        bind "3" { GoToTab 3; SwitchToMode "Normal"; }
+        bind "4" { GoToTab 4; SwitchToMode "Normal"; }
+        bind "5" { GoToTab 5; SwitchToMode "Normal"; }
+        bind "6" { GoToTab 6; SwitchToMode "Normal"; }
+        bind "7" { GoToTab 7; SwitchToMode "Normal"; }
+        bind "8" { GoToTab 8; SwitchToMode "Normal"; }
+        bind "9" { GoToTab 9; SwitchToMode "Normal"; }
+        bind "Tab" { ToggleTab; }
+    }
+
+    // --- Resize mode ---
+    resize {
+        bind "Esc" "Ctrl n" { SwitchToMode "Normal"; }
+        bind "h" "Left"  { Resize "Increase Left"; }
+        bind "l" "Right" { Resize "Increase Right"; }
+        bind "j" "Down"  { Resize "Increase Down"; }
+        bind "k" "Up"    { Resize "Increase Up"; }
+        bind "H" { Resize "Decrease Left"; }
+        bind "L" { Resize "Decrease Right"; }
+        bind "J" { Resize "Decrease Down"; }
+        bind "K" { Resize "Decrease Up"; }
+        bind "=" "+" { Resize "Increase"; }
+        bind "-" { Resize "Decrease"; }
+    }
+
+    // --- Move mode ---
+    move {
+        bind "Esc" "Ctrl h" { SwitchToMode "Normal"; }
+        bind "h" "Left"  { MovePane "Left"; }
+        bind "l" "Right" { MovePane "Right"; }
+        bind "j" "Down"  { MovePane "Down"; }
+        bind "k" "Up"    { MovePane "Up"; }
+        bind "Tab" { MovePane; }
+    }
+
+    // --- Scroll mode ---
+    scroll {
+        bind "Esc" "Ctrl s" { SwitchToMode "Normal"; }
+        bind "j" "Down"  { ScrollDown; }
+        bind "k" "Up"    { ScrollUp; }
+        bind "d" { HalfPageScrollDown; }
+        bind "u" { HalfPageScrollUp; }
+        bind "f" "PageDown" { PageScrollDown; }
+        bind "b" "PageUp"   { PageScrollUp; }
+        bind "g" { ScrollToTop; }
+        bind "G" { ScrollToBottom; }
+        bind "s" { SwitchToMode "EnterSearch"; SearchInput 0; }
+        bind "e" { EditScrollback; SwitchToMode "Normal"; }
+    }
+
+    // --- EnterSearch mode ---
+    entersearch {
+        bind "Esc" "Ctrl s" { SwitchToMode "Scroll"; }
+        bind "Enter" { SwitchToMode "Search"; }
+    }
+
+    // --- Search mode ---
+    search {
+        bind "Esc" "Ctrl s" { SwitchToMode "Normal"; }
+        bind "n" { Search "Down"; }
+        bind "N" { Search "Up"; }
+        bind "c" { SearchToggleOption "CaseSensitivity"; }
+        bind "w" { SearchToggleOption "Wrap"; }
+        bind "o" { SearchToggleOption "WholeWord"; }
+    }
+
+    // --- Session mode ---
+    session {
+        bind "Esc" "Ctrl o" { SwitchToMode "Normal"; }
+        bind "d" { Detach; }
+        bind "w" {
+            LaunchOrFocusPlugin "session-manager" {
+                floating true
+                move_to_focused_tab true
+            };
+            SwitchToMode "Normal"
+        }
+        bind "c" {
+            LaunchOrFocusPlugin "configuration" {
+                floating true
+                move_to_focused_tab true
+            };
+            SwitchToMode "Normal"
+        }
+    }
+
+    // --- RenamePane mode ---
+    renamepane {
+        bind "Esc" { UndoRenamePane; SwitchToMode "Pane"; }
+        bind "Enter" { SwitchToMode "Normal"; }
+    }
+
+    // --- RenameTab mode ---
+    renametab {
+        bind "Esc" { UndoRenameTab; SwitchToMode "Tab"; }
+        bind "Enter" { SwitchToMode "Normal"; }
+    }
+
+    // --- Shared binds (Super/Windows key, available everywhere except locked) ---
+    shared_except "locked" {
+        bind "Ctrl g" { SwitchToMode "Locked"; }
+        bind "Ctrl q" { Quit; }
+        bind "Super f" { ToggleFloatingPanes; }
+        bind "Super n" { NewPane; }
+        bind "Super i" { MoveTab "Left"; }
+        bind "Super o" { MoveTab "Right"; }
+        bind "Super h" "Super Left"  { MoveFocusOrTab "Left"; }
+        bind "Super l" "Super Right" { MoveFocusOrTab "Right"; }
+        bind "Super j" "Super Down"  { MoveFocus "Down"; }
+        bind "Super k" "Super Up"    { MoveFocus "Up"; }
+        bind "Super =" "Super +" { Resize "Increase"; }
+        bind "Super -" { Resize "Decrease"; }
+        bind "Super [" { PreviousSwapLayout; }
+        bind "Super ]" { NextSwapLayout; }
+        bind "Super p" { TogglePaneInGroup; }
+        bind "Super Shift p" { ToggleGroupMarking; }
+        bind "Super 1" { GoToTab 1; }
+        bind "Super 2" { GoToTab 2; }
+        bind "Super 3" { GoToTab 3; }
+        bind "Super 4" { GoToTab 4; }
+        bind "Super 5" { GoToTab 5; }
+        bind "Super 6" { GoToTab 6; }
+        bind "Super 7" { GoToTab 7; }
+        bind "Super 8" { GoToTab 8; }
+        bind "Super 9" { GoToTab 9; }
+        bind "Super t" { NewTab; }
+        bind "Super w" { CloseTab; }
+        bind "Super x" { CloseFocus; }
+        bind "Super d" { Detach; }
+        bind "Super s" { SwitchToMode "Scroll"; }
+        bind "Super r" { SwitchToMode "Resize"; }
+    }
+
+    shared_except "normal" "locked" {
+        bind "Enter" "Esc" { SwitchToMode "Normal"; }
+    }
+
+    shared_except "pane" "locked" {
+        bind "Ctrl p" { SwitchToMode "Pane"; }
+    }
+
+    shared_except "resize" "locked" {
+        bind "Ctrl n" { SwitchToMode "Resize"; }
+    }
+
+    shared_except "scroll" "locked" {
+        bind "Ctrl s" { SwitchToMode "Scroll"; }
+    }
+
+    shared_except "session" "locked" {
+        bind "Ctrl o" { SwitchToMode "Session"; }
+    }
+
+    shared_except "tab" "locked" {
+        bind "Ctrl t" { SwitchToMode "Tab"; }
+    }
+
+    shared_except "move" "locked" {
+        bind "Ctrl h" { SwitchToMode "Move"; }
+    }
+}
+
+// =============================================================================
+// Dracula theme
+// =============================================================================
+themes {
+    dracula {
+        fg "#f8f8f2"
+        bg "#282a36"
+        black "#21222c"
+        red "#ff5555"
+        green "#50fa7b"
+        yellow "#f1fa8c"
+        blue "#bd93f9"
+        magenta "#ff79c6"
+        cyan "#8be9fd"
+        white "#f8f8f2"
+        orange "#ffb86c"
+    }
+}

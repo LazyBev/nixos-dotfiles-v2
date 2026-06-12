@@ -33,7 +33,7 @@ install host:
 	nix --experimental-features "nix-command flakes" run github:nix-community/disko -- \
 	  --mode disko \
 	  --flake .#{{host}} && \
-	nixos-install --root /mnt --max-jobs 1 --flake .#{{host}}
+	nixos-install --root /mnt --max-jobs 4 --flake .#{{host}}
 
 devenv-shell:
 	devenv shell
