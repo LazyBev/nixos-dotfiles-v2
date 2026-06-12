@@ -22,6 +22,7 @@
       inputs.nur.modules.nixos.default
       ../core/boot.nix
       ../home/apps.nix
+      ../home/programs.nix
       ../home/services.nix
       self.nixosModules.overlays
       self.nixosModules.niriPackages

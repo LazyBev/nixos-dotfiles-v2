@@ -5,7 +5,31 @@
 in {
   flake.nixosModules.niriPackages = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
-      fuzzel gtklock networkmanagerapplet swaybg waypaper
+      # niri spawn-at-startup
+      fuzzel gtklock networkmanagerapplet swaybg
+      waypaper xwayland-satellite
+
+      # terminal
+      alacritty zellij
+
+      # file management
+      thunar thunar-archive-plugin thunar-volman tumbler
+      yazi
+
+      # browsing
+      qutebrowser
+
+      # media
+      mpv rmpc
+
+      # monitoring
+      btop cava
+
+      # dev
+      vscodium
+
+      # games
+      steam
     ];
   };
 
