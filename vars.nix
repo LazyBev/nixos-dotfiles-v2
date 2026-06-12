@@ -28,7 +28,7 @@ in
 
     username = "yari";
     fullname = "yari";
-    email = "yari@yari.xyz";
+    email = "lazy25yari@proton.me";
     hostname = "gentuwu";
     maxJobs = 4;
 
