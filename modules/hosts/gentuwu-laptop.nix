@@ -3,8 +3,8 @@
   inputs,
   ...
 }: let
-  vars = import ../../../vars.nix;
-  mkGentuwu = extraModules:
+  vars = import ../../vars.nix;
+  mkGentuwuLaptop = extraModules:
     inputs.nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs self vars;};
       modules =
@@ -15,8 +15,8 @@
         ];
     };
 in {
-  flake.nixosConfigurations.gentuwu = mkGentuwu [
+  flake.nixosConfigurations.gentuwu-laptop = mkGentuwuLaptop [
     self.nixosModules.common
-    {gentuwu.hostType = "desktop";}
+    {gentuwu.hostType = "laptop";}
   ];
 }

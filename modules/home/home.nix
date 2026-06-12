@@ -9,14 +9,7 @@ in {
       useUserPackages = true;
       users.${vars.username} = { pkgs, lib, ... }: {
         imports = [
-          ./hm/user-dirs.nix
-          ./hm/bat.nix
-          ./hm/fzf.nix
-          ./hm/librewolf.nix
-          ./hm/theme.nix
-          ./hm/vesktop.nix
-          ./hm/xdg-config-files.nix
-          ./hm/pictures.nix
+          ./home-manager.nix
         ];
 
         home.username = vars.username;

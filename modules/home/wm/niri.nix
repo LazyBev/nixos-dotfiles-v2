@@ -3,6 +3,13 @@
   inherit (inputs.wrapper-modules.wrappers) niri noctalia-shell;
   inherit (builtins) fromJSON readFile;
 in {
+  flake.nixosModules.niriPackages = { pkgs, ... }: {
+    environment.systemPackages = with pkgs; [
+      fuzzel gtklock networkmanagerapplet swaybg waypaper
+    ];
+  };
+
+  # ── Niri compositor wrapper ──────────────────────────────────────────────────
   perSystem = {
     pkgs,
     lib,

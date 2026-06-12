@@ -15,20 +15,21 @@
       description = "Whether this machine is a desktop or laptop";
     };
     imports = [
-      ../core/boot
-      ../core/power
-      ../core/programs
-      ../core/services
-      ../home/apps
-      ../home/services
-      ../home/env
-      ../home/fonts
+      ../core/boot.nix
+      ../core/power.nix
+      ../core/programs.nix
+      ../core/services.nix
+      ../home/apps.nix
+      ../home/services.nix
+      ../home/env.nix
+      ../home/fonts.nix
       ../home/security.nix
       ../hosts/gentuwu/disk-desktop.nix
       ../hosts/gentuwu/nvidia-desktop.nix
       ../hosts/gentuwu-laptop/disk-laptop.nix
       ../hosts/gentuwu-laptop/nvidia-laptop.nix
       self.nixosModules.overlays
+      self.nixosModules.niriPackages
     ];
     config = {
       gentuwu.powerProfiles.enable = lib.mkDefault true;

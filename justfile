@@ -4,16 +4,11 @@ check:
 flakeupd:
 	nix flake update
 
-upgrade:
-	doas nixos-rebuild switch --flake .#gentuwu -j$(( $(nproc) / 2 ))
-
-upgrade-laptop:
-	doas nixos-rebuild switch --flake .#gentuwu-laptop -j$(( $(nproc) / 2 ))
+upgrade host:
+	doas nixos-rebuild switch --flake .#{{host}} -j$(( $(nproc) / 2 ))
 
 gc:
 	doas nix-collect-garbage --delete-older-than 30d
-
-build: upgrade
 
 lint:
 	nix flake check
@@ -22,11 +17,23 @@ clean:
 	doas nix-collect-garbage -d
 	nix-collect-garbage -d
 
-sysupd:
-	nix flake update && doas nixos-rebuild switch --flake .#gentuwu -j$(( $(nproc) / 2 ))
+sysupd host:
+	nix flake update && doas nixos-rebuild switch --flake .#{{host}} -j$(( $(nproc) / 2 ))
 
-sysupd-laptop:
-	nix flake update && doas nixos-rebuild switch --flake .#gentuwu-laptop -j$(( $(nproc) / 2 ))
+gp msg:
+	git add .
+	git commit -m "{{msg}}"
+	git push
+
+install host:
+	wipefs -a /dev/nvme0n1 && \
+	sgdisk --zap-all /dev/nvme0n1 && \
+	partprobe /dev/nvme0n1 && sleep 2 && \
+	wipefs -a /dev/nvme0n1p* 2>/dev/null; \
+	nix --experimental-features "nix-command flakes" run github:nix-community/disko -- \
+	  --mode disko \
+	  --flake .#{{host}} && \
+	nixos-install --root /mnt --flake .#{{host}}
 
 devenv-shell:
 	devenv shell

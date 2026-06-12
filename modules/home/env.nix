@@ -1,4 +1,4 @@
-{ vars, ... }: {
+{ vars, pkgs, ... }: {
   environment = {
     variables = {
       GTK_THEME = vars.theme;
@@ -16,4 +16,13 @@
   };
 
   xdg.mime.defaultApplications."x-scheme-handler/terminal" = "${vars.terminal}.desktop";
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-gnome
+    ];
+    config.common.default = "gtk";
+  };
 }

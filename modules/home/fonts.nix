@@ -15,11 +15,19 @@
     '';
 
     meta = {
-      description = "Pragmata Pro doppelgänger made of Iosevka SS08";
+      description = "Pragmata Pro doppelganger made of Iosevka SS08";
       homepage = "https://github.com/shytikov/pragmasevka";
       license = lib.licenses.ofl;
     };
   };
 in {
-  fonts.packages = [ pragmasevka ];
+  fonts.packages = with pkgs; [
+    nerd-fonts.fira-code
+    nerd-fonts.hack
+    nerd-fonts.symbols-only
+    nerd-fonts.iosevka
+    symbola
+    dejavu_fonts
+    pragmasevka
+  ];
 }
