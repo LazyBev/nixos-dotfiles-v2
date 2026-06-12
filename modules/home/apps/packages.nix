@@ -7,61 +7,69 @@ in {
 }: {
   environment.systemPackages = with pkgs;
     [
-      # tui
+      # terminal
       alacritty
+      zellij
       btop
-      delta
+      cava
+      lazygit
       yazi
       tree
-      kitty
       zathura
       imv
-      mpv
-      rmpc
-      cava
-      zellij
-      lazygit
-      gh
-      pay-respects
-
-      # gui
-      fuzzel
-      vscodium
-      thunar
-      thunar-archive-plugin
-      thunar-volman
-      tumbler
-      networkmanagerapplet
-      gtklock
-      qutebrowser
-      steam
-      tor-browser
-      gajim
-      proton-vpn
-      protonmail-desktop
-
-      # dev
-      tinycc
-      opencode
-      rust-stakeholder
-      wl-clipboard
-
-      # virt
-      qemu
 
       # media
+      mpv
+      rmpc
       poppler
       chafa
       ffmpegthumbnailer
       libnotify
+
+      # gui
+      fuzzel
+      gtklock
+      networkmanagerapplet
+      thunar
+      thunar-archive-plugin
+      thunar-volman
+      tumbler
+      waypaper
+
+      # browsing
+      qutebrowser
+      tor-browser
+
+      # social
+      gajim
+
+      # dev
+      delta
+      opencode
+      tinycc
+      rust-stakeholder
+      vscodium
+      wl-clipboard
+      pay-respects
+
+      # virt
+      qemu
+
+      # games
+      steam
+      umu-launcher
+
+      # vpn
+      proton-vpn
+      protonmail-desktop
 
       # themes
       catppuccin-sddm
       catppuccin-cursors.mochaMauve
       dracula-icon-theme
     ]
-    ++ (pkgs.lib.optional (vars.systemTheme == "dracula") pkgs.dracula-theme)
-    ++ (pkgs.lib.optional (vars.systemTheme == "caelus") pkgs.caelus-theme)
+    ++ pkgs.lib.optional (vars.systemTheme == "caelus") pkgs.caelus-theme
+    ++ pkgs.lib.optional (vars.systemTheme == "dracula") pkgs.dracula-theme
     ++ [
       (inputs.wrapper-modules.wrappers.noctalia-shell.wrap {
         inherit pkgs;
