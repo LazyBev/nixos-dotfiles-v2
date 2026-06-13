@@ -6,9 +6,12 @@
     pref("webgl.disabled", true);
     pref("privacy.resistFingerprinting", true);
     pref("privacy.clearOnShutdown.history", true);
+    pref("privacy.clearOnShutdown.cookies", false);
+    pref("privacy.clearOnShutdown.sessions", false);
     pref("network.cookie.lifetimePolicy", 3);
     pref("network.cookie.lifetime.days", 5);
     pref("browser.fullscreen.autohide", false);
+    pref("signon.rememberSignons", true);
   '';
 in {
   programs.librewolf = {

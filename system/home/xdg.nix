@@ -31,4 +31,7 @@
   xdg.configFile."fcitx5/conf/keyboard.conf".source = ../configs/apps/fcitx5/conf/keyboard.conf;
   xdg.configFile."fcitx5/conf/notifications.conf".source = ../configs/apps/fcitx5/conf/notifications.conf;
   xdg.configFile."fcitx5/conf/chttrans.conf".source = ../configs/apps/fcitx5/conf/chttrans.conf;
+
+  xdg.configFile."sway/config".source = ../configs/apps/sway/config;
+  xdg.configFile."niri/config.kdl".source = ../configs/apps/niri/config.kdl;
 }

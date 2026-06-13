@@ -1,63 +1,54 @@
-// Dracula colors
-// Background: #282a36  Current: #44475a
-// Purple: #bd93f9  Pink: #ff79c6
-
-// -----------------------
-// INPUT
-// -----------------------
 input {
-  keyboard {
-    xkb {
-      layout "gb"
-      options "numpad:mac"
+    keyboard {
+        xkb {
+            layout "gb"
+            options "numpad:mac"
+        }
     }
-  }
-  touchpad {
-    tap
-    natural-scroll
-  }
-  mouse {}
-  trackpoint {}
+
+    touchpad {
+        tap
+        natural-scroll
+    }
+
+    mouse {
+    }
+
+    trackpoint {
+    }
 }
 
-// -----------------------
-// OUTPUT
-// -----------------------
 output "eDP-1" {
-  mode "1920x1080@120.030"
-  scale 1.0
-  transform "normal"
+    mode "1920x1080@120.030"
+    scale 1.0
+    transform "normal"
 }
 
-// -----------------------
-// LAYOUT
-// -----------------------
 layout {
-  gaps 10
-  center-focused-column "never"
-  default-column-width { proportion 0.5; }
-  focus-ring {
-    width 2
-    active-color "#bd93f9"
-    inactive-color "#44475a"
-  }
-  border {
-    off
-  }
-  preset-column-widths {
-    proportion 0.33333
-    proportion 0.5
-    proportion 0.66667
-  }
+    gaps 10
+    center-focused-column "never"
+    default-column-width { proportion 1.0; }
+
+    focus-ring {
+        width 2
+        active-color "#bd93f9"
+        inactive-color "#44475a"
+    }
+
+    border {
+        off
+    }
+
+    preset-column-widths {
+        proportion 0.5
+        proportion 1.0
+    }
 }
 
 animations {
-  slowdown 1.0
+    slowdown 1.0
 }
 
-// -----------------------
-// WORKSPACES
-// -----------------------
 workspace "1"
 workspace "2"
 workspace "3"
@@ -68,155 +59,168 @@ workspace "7"
 workspace "8"
 workspace "9"
 
-// -----------------------
-// WINDOW RULES
-// -----------------------
 window-rule {
-  geometry-corner-radius 8
-  clip-to-geometry true
+    geometry-corner-radius 8
+    clip-to-geometry true
 }
 
 window-rule {
-  match app-id="zen$" title="^Picture-in-Picture$"
-  open-floating true
+    match app-id="zen$" title="^Picture-in-Picture$"
+    open-floating true
 }
 
 window-rule {
-  match title="^Picture-in-Picture$"
-  open-floating true
+    match title="^Picture-in-Picture$"
+    open-floating true
 }
 
 window-rule {
-  match app-id="^pavucontrol$"
-  open-floating true
+    match app-id="^pavucontrol$"
+    open-floating true
 }
 
 window-rule {
-  match app-id="^nm-connection-editor$"
-  open-floating true
+    match app-id="^nm-connection-editor$"
+    open-floating true
+}
+
+window-rule {
+    match app-id="^Alacritty$"
+    default-column-width { proportion 0.5; }
+}
+
+window-rule {
+    match app-id="^thunar$"
+    default-column-width { proportion 0.5; }
+}
+
+window-rule {
+    match app-id="^mpv$"
+    open-floating true
+    default-column-width { fixed 640; }
+    default-window-height { fixed 360; }
 }
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
-// -----------------------
-// STARTUP
-// -----------------------
-spawn-at-startup "xwayland-satellite"
-spawn-at-startup "noctalia-shell"
-spawn-at-startup "dunst"
-spawn-at-startup "nm-applet" "--indicator"
-spawn-at-startup "bash" "-lc" "swaybg -i ~/Pictures/manhattan.jpg"
-
 prefer-no-csd
 
-// -----------------------
-// ENVIRONMENT
-// -----------------------
 environment {
-  XDG_SESSION_TYPE "wayland"
-  XDG_CURRENT_DESKTOP "niri"
-  XDG_SESSION_DESKTOP "niri"
-  DISPLAY ":1"
-  GDK_BACKEND "wayland"
-  GTK_USE_PORTAL "1"
-  QT_QPA_PLATFORM "wayland"
-  QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
-  QT_AUTO_SCREEN_SCALE_FACTOR "1"
-  ELECTRON_OZONE_PLATFORM_HINT "wayland"
-  MOZ_ENABLE_WAYLAND "1"
-  SDL_VIDEODRIVER "wayland"
-  CLUTTER_BACKEND "wayland"
-  _JAVA_AWT_WM_NONREPARENTING "1"
-  XDG_DESKTOP_PORTAL "xdg-desktop-portal"
-  XCURSOR_SIZE "24"
-  WLR_NO_HARDWARE_CURSORS "1"
+    XDG_SESSION_TYPE "wayland"
+    XDG_CURRENT_DESKTOP "niri"
+    XDG_SESSION_DESKTOP "niri"
+    DISPLAY ":1"
+    GDK_BACKEND "wayland"
+    GTK_USE_PORTAL "1"
+    QT_QPA_PLATFORM "wayland"
+    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+    QT_AUTO_SCREEN_SCALE_FACTOR "1"
+    ELECTRON_OZONE_PLATFORM_HINT "wayland"
+    MOZ_ENABLE_WAYLAND "1"
+    SDL_VIDEODRIVER "wayland"
+    CLUTTER_BACKEND "wayland"
+    _JAVA_AWT_WM_NONREPARENTING "1"
+    XDG_DESKTOP_PORTAL "xdg-desktop-portal"
+    XCURSOR_THEME "catppuccin-mocha-mauve-cursors"
+    XCURSOR_SIZE "24"
+    WLR_NO_HARDWARE_CURSORS "1"
 }
 
-// -----------------------
-// KEYBINDS
-// -----------------------
+spawn-at-startup "xwayland-satellite"
+spawn-at-startup "noctalia-shell"
+spawn-at-startup "fcitx5" "-d"
+spawn-at-startup "dunst"
+spawn-at-startup "bash" "-lc" "sleep 1 && nm-applet --indicator"
+spawn-at-startup "bash" "-lc" "swaybg -i ~/Pictures/matikanefuku.png"
+
 binds {
-  Alt+Shift+Slash { show-hotkey-overlay; }
+    Alt+Shift+Slash { show-hotkey-overlay; }
 
-  // Apps
-  Alt+Return      { spawn "alacritty"; }
-  Alt+B           { spawn "qutebrowser"; }
-  Alt+Shift+B     { spawn "firefox"; }
-  Alt+T           { spawn "nemo"; }
-  Alt+S           { spawn "steam"; }
-  Alt+Shift+S     { spawn "flatpak" "run" "org.vinegarhq.Sober"; }
-  Alt+D           { spawn "fuzzel"; }
-  Alt+V           { spawn "lutris"; }
-  Alt+Y           { spawn "waypaper"; }
-  Alt+C           { spawn "alacritty" "-e" "nvim" "/etc/nixos/home.nix"; }
+    Alt+Return       { spawn "alacritty"; }
+    Alt+Shift+Return { spawn "alacritty" "-e" "zellij"; }
+    Alt+B            { spawn "qutebrowser"; }
+    Alt+Shift+B      { spawn "librewolf"; }
+    Alt+T            { spawn "alacritty" "-e" "yazi"; }
+    Alt+Shift+T      { spawn "thunar"; }
+    Alt+E            { spawn "alacritty" "-e" "nvim"; }
+    Alt+Shift+E      { spawn "vscodium"; }
+    Alt+S            { spawn "alacritty" "-e" "rmpc"; }
+    Alt+Shift+S      { spawn "steam"; }
+    Alt+V            { spawn "alacritty" "-e" "btop"; }
+    Alt+Shift+V      { spawn "vesktop"; }
+    Alt+D            { spawn "fuzzel"; }
+    Alt+Y            { spawn "waypaper"; }
 
-  // Noctalia IPC
-  Alt+Space       { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-  Alt+Escape      { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
+    Alt+Escape       { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
+    Mod+Shift+L      { spawn "gtklock" "-s" "/home/yari/.config/gtklock/style.css" "-b" "/home/yari/Pictures/matikanefuku.png"; }
+    Alt+Ctrl+P       { spawn "doas" "reboot"; }
+    Alt+Shift+P      { spawn "doas" "poweroff"; }
+    Alt+Shift+Backspace { quit; }
 
-  // Window / Workspace
-  Ctrl+Alt+Q      { close-window; }
+    Alt+X            { screenshot; }
+    Alt+Shift+X      { screenshot-screen; }
+    Alt+Ctrl+X       { screenshot-window; }
 
-  Alt+J           { focus-column-left; }
-  Alt+L           { focus-column-right; }
-  Alt+I           { focus-window-up; }
-  Alt+K           { focus-window-down; }
+    Ctrl+Alt+Q       { close-window; }
 
-  Alt+Shift+J     { move-column-left; }
-  Alt+Shift+L     { move-column-right; }
-  Alt+Shift+I     { move-window-up; }
-  Alt+Shift+K     { move-window-down; }
+    Alt+H            { focus-column-left; }
+    Alt+L            { focus-column-right; }
+    Alt+K            { focus-window-up; }
+    Alt+J            { focus-window-down; }
 
-  Alt+1           { focus-workspace "1"; }
-  Alt+2           { focus-workspace "2"; }
-  Alt+3           { focus-workspace "3"; }
-  Alt+4           { focus-workspace "4"; }
-  Alt+5           { focus-workspace "5"; }
-  Alt+6           { focus-workspace "6"; }
-  Alt+7           { focus-workspace "7"; }
-  Alt+8           { focus-workspace "8"; }
-  Alt+9           { focus-workspace "9"; }
-  Alt+M           { focus-workspace-down; }
-  Alt+N           { focus-workspace-up; }
+    Alt+Shift+H      { move-column-left; }
+    Alt+Shift+L      { move-column-right; }
+    Alt+Shift+K      { move-window-up; }
+    Alt+Shift+J      { move-window-down; }
 
-  Alt+Shift+1     { move-column-to-workspace "1"; }
-  Alt+Shift+2     { move-column-to-workspace "2"; }
-  Alt+Shift+3     { move-column-to-workspace "3"; }
-  Alt+Shift+4     { move-column-to-workspace "4"; }
-  Alt+Shift+5     { move-column-to-workspace "5"; }
-  Alt+Shift+6     { move-column-to-workspace "6"; }
-  Alt+Shift+7     { move-column-to-workspace "7"; }
-  Alt+Shift+8     { move-column-to-workspace "8"; }
-  Alt+Shift+9     { move-column-to-workspace "9"; }
-  Alt+Shift+M     { move-column-to-workspace-down; }
-  Alt+Shift+N     { move-column-to-workspace-up; }
+    Alt+Tab          { toggle-window-floating; }
+    Alt+Ctrl+Tab     { focus-floating; }
+    Alt+Space        { focus-tiling; }
+    Alt+F            { fullscreen-window; }
+    Alt+W            { switch-preset-column-width; }
 
-  Alt+Minus       { set-column-width "-10%"; }
-  Alt+Equal       { set-column-width "+10%"; }
-  Alt+Shift+Minus { set-window-height "-10%"; }
-  Alt+Shift+Equal { set-window-height "+10%"; }
-  Alt+Comma       { consume-window-into-column; }
-  Alt+Period      { expel-window-from-column; }
-  Alt+BracketLeft  { consume-or-expel-window-left; }
-  Alt+BracketRight { consume-or-expel-window-right; }
+    Alt+Minus        { set-column-width "-10%"; }
+    Alt+Equal        { set-column-width "+10%"; }
+    Alt+Shift+Minus  { set-window-height "-10%"; }
+    Alt+Shift+Equal  { set-window-height "+10%"; }
 
-  Alt+Tab         { toggle-window-floating; }
-  Alt+W           { maximize-column; }
-  Alt+F           { fullscreen-window; }
+    Alt+Comma        { consume-window-into-column; }
+    Alt+Period       { expel-window-from-column; }
+    Alt+BracketLeft  { consume-or-expel-window-left; }
+    Alt+BracketRight { consume-or-expel-window-right; }
 
-  // System
-  Alt+Shift+Backspace { quit; }
-  Mod+Shift+L     { spawn "swaylock" "-f" "-c" "000000"; }
-  Alt+Ctrl+P      { spawn "doas" "reboot"; }
-  Alt+Shift+P     { spawn "doas" "poweroff"; }
+    Alt+1            { focus-workspace "1"; }
+    Alt+2            { focus-workspace "2"; }
+    Alt+3            { focus-workspace "3"; }
+    Alt+4            { focus-workspace "4"; }
+    Alt+5            { focus-workspace "5"; }
+    Alt+6            { focus-workspace "6"; }
+    Alt+7            { focus-workspace "7"; }
+    Alt+8            { focus-workspace "8"; }
+    Alt+9            { focus-workspace "9"; }
+    Alt+N            { focus-workspace-up; }
+    Alt+M            { focus-workspace-down; }
 
-  // Volume
-  XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
-  XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
-  XF86AudioMute    allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-  XF86AudioMicMute allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+    Alt+Shift+1      { move-column-to-workspace "1"; }
+    Alt+Shift+2      { move-column-to-workspace "2"; }
+    Alt+Shift+3      { move-column-to-workspace "3"; }
+    Alt+Shift+4      { move-column-to-workspace "4"; }
+    Alt+Shift+5      { move-column-to-workspace "5"; }
+    Alt+Shift+6      { move-column-to-workspace "6"; }
+    Alt+Shift+7      { move-column-to-workspace "7"; }
+    Alt+Shift+8      { move-column-to-workspace "8"; }
+    Alt+Shift+9      { move-column-to-workspace "9"; }
+    Alt+Shift+N      { move-column-to-workspace-up; }
+    Alt+Shift+M      { move-column-to-workspace-down; }
 
-  // Screenshots (grim+slurp style, save + copy)
-  Alt+X           { spawn "bash" "-c" "grim -g \"$(slurp)\" - | tee ~/Pictures/Screenshots/scr-$(date +%F-%H-%M-%S).png | wl-copy"; }
-  Alt+Shift+X     { spawn "bash" "-c" "grim - | tee ~/Pictures/Screenshots/scr-$(date +%F-%H-%M-%S).png | wl-copy"; }
+    XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
+    XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
+    XF86AudioMute        { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute     { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+    XF86AudioPlay        { spawn "playerctl" "play-pause"; }
+    XF86AudioNext        { spawn "playerctl" "next"; }
+    XF86AudioPrev        { spawn "playerctl" "previous"; }
+    Alt+Ctrl+Space       { spawn "playerctl" "play-pause"; }
+    Alt+Ctrl+L           { spawn "playerctl" "next"; }
+    Alt+Ctrl+H           { spawn "playerctl" "previous"; }
 }

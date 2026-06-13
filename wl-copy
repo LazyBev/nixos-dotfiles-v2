@@ -1,0 +1,37 @@
+nix flake update && doas nixos-rebuild switch --flake .#gentuwu-laptop -j$(( $(nproc) / 2 ))
+warning: Git tree '/home/yari/nixos-cfg' is dirty
+warning: Git tree '/home/yari/nixos-cfg' is dirty
+building the system configuration...
+warning: Git tree '/home/yari/nixos-cfg' is dirty
+error:
+       … while calling the 'head' builtin
+         at «github:nixos/nixpkgs/9ae611a455b90cf061d8f332b977e387bda8e1ca?narHash=sha256-md8WlXOlfnIeHeOScMTTHFyf2d6iaTwPl2apR5EQ3P4%3D»/lib/attrsets.nix:1712:13:
+         1711|           if length values == 1 || pred here (elemAt values 1) (head values) then
+         1712|             head values
+             |             ^
+         1713|           else
+
+       … while evaluating the attribute 'value'
+         at «github:nixos/nixpkgs/9ae611a455b90cf061d8f332b977e387bda8e1ca?narHash=sha256-md8WlXOlfnIeHeOScMTTHFyf2d6iaTwPl2apR5EQ3P4%3D»/lib/modules.nix:1169:7:
+         1168|     // {
+         1169|       value = addErrorContext "while evaluating the option `${showOption loc}':" value;
+             |       ^
+         1170|       inherit (res.defsFinal') highestPrio;
+
+       … while evaluating the option `system.build.toplevel':
+
+       … while evaluating definitions from `/nix/store/gw7fxaw8z5szcqlzyzcnrshzi60zj664-source/nixos/modules/system/activation/top-level.nix':
+
+       … while evaluating the option `assertions':
+
+       … while evaluating definitions from `/nix/store/1vrfb1qyf6j2zxri5wy795vsrfj3bsfn-source/nixos/common.nix':
+
+       (stack trace truncated; use '--show-trace' to show the full, detailed trace)
+
+       error: Path 'system/home/wallpapers.nix' in the repository "/home/yari/nixos-cfg" is not tracked by Git.
+
+       To make it visible to Nix, run:
+
+       git -C "/home/yari/nixos-cfg" add "system/home/wallpapers.nix"
+Command 'nix --extra-experimental-features 'nix-command flakes' build --print-out-paths '.#nixosConfigurations."gentuwu-laptop".config.system.build.toplevel' --no-link --max-jobs 6' returned non-zero exit status 1.
+error: recipe `sysupd` failed on line 21 with exit code 1

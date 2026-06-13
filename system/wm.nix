@@ -1,6 +1,6 @@
 { self, inputs, ... }: {
   imports = [
-    ./wm/dwl.nix
+    ./wm/sway.nix
     ./wm/niri.nix
   ];
 }
