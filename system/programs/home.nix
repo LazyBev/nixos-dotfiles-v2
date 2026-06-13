@@ -15,6 +15,7 @@ in {
           ../home/vesktop.nix
           ../home/theme.nix
           ../home/xdg.nix
+          ../home/wallpapers.nix
         ];
 
         home.username = vars.username;

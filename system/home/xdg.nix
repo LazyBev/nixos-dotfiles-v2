@@ -2,6 +2,14 @@
   xdg.userDirs = {
     enable = true;
     createDirectories = true;
+    desktop = "$HOME/Desktop";
+    documents = "$HOME/docs";
+    download = "$HOME/dl";
+    music = "$HOME/music";
+    pictures = "$HOME/Pictures";
+    videos = "$HOME/vid";
+    templates = "$HOME/Templates";
+    publicShare = "$HOME/Public";
   };
 
   xdg.configFile."dunst/dunstrc".source = ../configs/apps/dunst/dunstrc;

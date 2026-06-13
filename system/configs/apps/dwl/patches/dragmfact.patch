@@ -8,17 +8,6 @@ Subject: [PATCH] Change mfact using Middle mouse
  dwl.c        | 9 ++++++++-
  2 files changed, 9 insertions(+), 2 deletions(-)
 
-diff --git a/config.def.h b/config.def.h
-index 9009517..3c26522 100644
---- a/config.def.h
-+++ b/config.def.h
-@@ -166,6 +166,6 @@ static const Key keys[] = {
- 
- static const Button buttons[] = {
- 	{ MODKEY, BTN_LEFT,   moveresize,     {.ui = CurMove} },
--	{ MODKEY, BTN_MIDDLE, togglefloating, {0} },
-+	{ MODKEY, BTN_MIDDLE, moveresize,     {.ui = Curmfact} },
- 	{ MODKEY, BTN_RIGHT,  moveresize,     {.ui = CurResize} },
  };
 diff --git a/dwl.c b/dwl.c
 index fa76db2..528e102 100644
@@ -56,4 +45,3 @@ index fa76db2..528e102 100644
  
 -- 
 2.43.2
-

@@ -24,6 +24,10 @@ static uint32_t colors[][3]                = {
 	[SchemeUrg]  = { 0,          0,          0x770000ff },
 };
 
+/* swallow */
+static int enableautoswallow = 1;
+static float swallowborder = 1.0f;
+
 /* tagging */
 static char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 #define TAGCOUNT 9
@@ -42,10 +46,10 @@ static const char *const autostart[] = {
 };
 
 static const Rule rules[] = {
-	/* app_id             title       tags mask     isfloating   monitor */
-	{ "foot",             NULL,       0,            0,           -1 },
-	{ "Gimp_EXAMPLE",     NULL,       0,            1,           -1 },
-	{ "firefox_EXAMPLE",  NULL,       1 << 8,       0,           -1 },
+	/* app_id             title       tags mask     isfloating   isterm   noswallow   monitor */
+	{ "foot",             NULL,       0,            0,           1,       1,          -1 },
+	{ "Gimp_EXAMPLE",     NULL,       0,            1,           0,       0,          -1 }, /* Start on currently visible tags floating, not tiled */
+	{ "firefox_EXAMPLE",  NULL,       1 << 8,       0,           0,       0,          -1 }, /* Start on ONLY tag "9" */
     /* default/example rule: can be changed but cannot be eliminated; at least one rule must exist */
 };
 

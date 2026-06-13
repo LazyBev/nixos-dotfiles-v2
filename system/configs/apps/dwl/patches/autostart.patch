@@ -8,22 +8,6 @@ Subject: [PATCH] Applied autostart patch
  dwl.c        | 58 +++++++++++++++++++++++++++++++++++++++++++++++++---
  2 files changed, 61 insertions(+), 3 deletions(-)
 
-diff --git a/config.def.h b/config.def.h
-index 8a6eda0..6eb0db4 100644
---- a/config.def.h
-+++ b/config.def.h
-@@ -20,6 +20,12 @@ static const float fullscreen_bg[]         = {0.0f, 0.0f, 0.0f, 1.0f}; /* You ca
- /* logging */
- static int log_level = WLR_ERROR;
- 
-+/* Autostart */
-+static const char *const autostart[] = {
-+        "wbg", "/path/to/your/image", NULL,
-+        NULL /* terminate */
-+};
-+
- static const Rule rules[] = {
- 	/* app_id             title       tags mask     isfloating   monitor */
  	{ "Gimp_EXAMPLE",     NULL,       0,            1,           -1 }, /* Start on currently visible tags floating, not tiled */
 diff --git a/dwl.c b/dwl.c
 index 44f3ad9..e7b6199 100644
@@ -138,4 +122,3 @@ index 44f3ad9..e7b6199 100644
  		if (pipe(piperw) < 0)
 -- 
 2.52.0
-

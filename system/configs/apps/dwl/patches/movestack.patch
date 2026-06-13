@@ -8,18 +8,6 @@ Subject: [PATCH] Add movestack
  dwl.c        | 43 +++++++++++++++++++++++++++++++++++++++++++
  2 files changed, 45 insertions(+)
 
-diff --git a/config.def.h b/config.def.h
-index 8a6eda0..f490e24 100644
---- a/config.def.h
-+++ b/config.def.h
-@@ -125,6 +125,8 @@ static const Key keys[] = {
- 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Return,      spawn,            {.v = termcmd} },
- 	{ MODKEY,                    XKB_KEY_j,           focusstack,       {.i = +1} },
- 	{ MODKEY,                    XKB_KEY_k,           focusstack,       {.i = -1} },
-+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_j,           movestack,        {.i = +1} },
-+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_k,           movestack,        {.i = -1} },
- 	{ MODKEY,                    XKB_KEY_i,           incnmaster,       {.i = +1} },
- 	{ MODKEY,                    XKB_KEY_d,           incnmaster,       {.i = -1} },
  	{ MODKEY,                    XKB_KEY_h,           setmfact,         {.f = -0.05f} },
 diff --git a/dwl.c b/dwl.c
 index 44f3ad9..726fbdd 100644
@@ -84,4 +72,3 @@ index 44f3ad9..726fbdd 100644
  {
 -- 
 2.53.0
-

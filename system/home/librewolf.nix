@@ -6,8 +6,8 @@
     pref("webgl.disabled", true);
     pref("privacy.resistFingerprinting", true);
     pref("privacy.clearOnShutdown.history", true);
-    pref("privacy.clearOnShutdown.cookies", true);
-    pref("network.cookie.lifetimePolicy", 2);
+    pref("network.cookie.lifetimePolicy", 3);
+    pref("network.cookie.lifetime.days", 5);
     pref("browser.fullscreen.autohide", false);
   '';
 in {

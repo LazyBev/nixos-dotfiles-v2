@@ -19,7 +19,7 @@ in {
           grim slurp wmenu playerctl dunst fcitx5 networkmanagerapplet
           alacritty zellij qutebrowser librewolf thunar yazi
           vscodium rmpc steam vesktop btop waypaper gtklock
-          swaybg xwayland-satellite wmenu
+          swaybg xwayland-satellite wmenu slstatus pavucontrol
         ];
 
         programs.dwl.extraSessionCommands = ''
@@ -38,12 +38,6 @@ in {
           export XCURSOR_THEME=${vars.cursorTheme}
           export XCURSOR_SIZE=${toString vars.cursorSize}
           export WLR_NO_HARDWARE_CURSORS=1
-
-          ${pkgs.dunst}/bin/dunst &
-          ${pkgs.fcitx5}/bin/fcitx5 -d &
-          ${pkgs.networkmanagerapplet}/bin/nm-applet --indicator &
-          ${pkgs.xwayland-satellite}/bin/xwayland-satellite &
-          ${pkgs.swaybg}/bin/swaybg -i ~/Pictures/matikanefuku.png &
         '';
       })
     ];
@@ -76,13 +70,6 @@ in {
       export XCURSOR_THEME=${vars.cursorTheme}
       export XCURSOR_SIZE=${toString vars.cursorSize}
       export WLR_NO_HARDWARE_CURSORS=1
-
-      ${pkgs.dunst}/bin/dunst &
-      ${pkgs.fcitx5}/bin/fcitx5 -d &
-      ${myNoctalia}/bin/noctalia-shell &
-      ${pkgs.networkmanagerapplet}/bin/nm-applet --indicator &
-      ${pkgs.xwayland-satellite}/bin/xwayland-satellite &
-      ${pkgs.swaybg}/bin/swaybg -i ~/Pictures/matikanefuku.png &
 
       exec ${pkgs.dwl}/bin/dwl "$@"
     '';

@@ -9,27 +9,6 @@ Subject: [PATCH] cycle through tags
  2 files changed, 38 insertions(+)
  create mode 100644 shiftview.c
 
-diff --git a/config.def.h b/config.def.h
-index 8a6eda0..fd80703 100644
---- a/config.def.h
-+++ b/config.def.h
-@@ -118,6 +118,8 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
- static const char *termcmd[] = { "foot", NULL };
- static const char *menucmd[] = { "wmenu-run", NULL };
- 
-+#include "shiftview.c"
-+
- static const Key keys[] = {
- 	/* Note that Shift changes certain key codes: 2 -> at, etc. */
- 	/* modifier                  key                  function          argument */
-@@ -131,6 +133,8 @@ static const Key keys[] = {
- 	{ MODKEY,                    XKB_KEY_l,           setmfact,         {.f = +0.05f} },
- 	{ MODKEY,                    XKB_KEY_Return,      zoom,             {0} },
- 	{ MODKEY,                    XKB_KEY_Tab,         view,             {0} },
-+	{ MODKEY,                    XKB_KEY_a,          shiftview,      { .i = -1 } },
-+	{ MODKEY,                    XKB_KEY_semicolon,  shiftview,      { .i = 1 } },
- 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_c,           killclient,       {0} },
- 	{ MODKEY,                    XKB_KEY_t,           setlayout,        {.v = &layouts[0]} },
  	{ MODKEY,                    XKB_KEY_f,           setlayout,        {.v = &layouts[1]} },
 diff --git a/shiftview.c b/shiftview.c
 new file mode 100644
@@ -73,4 +52,3 @@ index 0000000..fa53db0
 +}
 -- 
 2.52.0
-
