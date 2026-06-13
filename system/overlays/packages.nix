@@ -62,7 +62,6 @@ in {
             ../configs/apps/dwl/patches/shiftview.patch
             ../configs/apps/dwl/patches/sticky.patch
             ../configs/apps/dwl/patches/autostart.patch
-            ../configs/apps/dwl/patches/swallow.patch
             ../configs/apps/dwl/patches/bar.patch
             ../configs/apps/dwl/patches/cfact.patch
             ../configs/apps/dwl/patches/hide_vacant_tags.patch
