@@ -4,6 +4,7 @@
   services.displayManager.sddm = {
     enable = true;
     theme = "catppuccin-mocha-mauve";
+    extraPackages = [ pkgs.catppuccin-sddm ];
     settings = {
       General = {
         AllowRootLogin = true;
