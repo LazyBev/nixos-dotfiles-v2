@@ -51,7 +51,7 @@ in {
 
         dwl = (prev.dwl.override {
           enableXWayland = true;
-          configH = ../configs/apps/dwl/config.h;
+          configH = ../configs/apps/dwl/config.def.h;
         }).overrideAttrs (old: {
           patches = (old.patches or []) ++ [
             ../configs/apps/dwl/patches/vanitygaps.patch
@@ -61,7 +61,9 @@ in {
             ../configs/apps/dwl/patches/dragmfact.patch
             ../configs/apps/dwl/patches/shiftview.patch
             ../configs/apps/dwl/patches/sticky.patch
+            ../configs/apps/dwl/patches/autostart.patch
           ];
+          NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -Wno-error=unused-function -Wno-error=unused-variable -Wno-error=missing-field-initializers";
         });
 
         caelus-theme = prev.stdenvNoCC.mkDerivation {
@@ -73,6 +75,10 @@ in {
             cp -r * $out/share/themes/caelus-custom/
           '';
           meta.description = "caelus GTK theme";
+        };
+
+        slstatus = prev.slstatus.override {
+          conf = ../configs/apps/slstatus/config.h;
         };
       })
     ];
