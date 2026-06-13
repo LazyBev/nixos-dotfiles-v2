@@ -62,6 +62,11 @@ in {
             ../configs/apps/dwl/patches/shiftview.patch
             ../configs/apps/dwl/patches/sticky.patch
             ../configs/apps/dwl/patches/autostart.patch
+            ../configs/apps/dwl/patches/swallow.patch
+            ../configs/apps/dwl/patches/bar.patch
+            ../configs/apps/dwl/patches/cfact.patch
+            ../configs/apps/dwl/patches/hide_vacant_tags.patch
+            ../configs/apps/dwl/patches/controlled_fullscreen.patch
           ];
           NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -Wno-error=unused-function -Wno-error=unused-variable -Wno-error=missing-field-initializers";
         });
